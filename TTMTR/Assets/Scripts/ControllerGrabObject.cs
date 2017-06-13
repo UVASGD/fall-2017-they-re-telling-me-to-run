@@ -66,7 +66,7 @@ public class ControllerGrabObject : MonoBehaviour
         {
             return;
         }
-
+        Debug.Log("Now colliding with " + col.gameObject.name);
         collidingObject = col.gameObject;
     }
 
@@ -76,6 +76,7 @@ public class ControllerGrabObject : MonoBehaviour
         {
             if (collidingObject)
             {
+                Debug.Log("I should grab " + collidingObject.name);
                 GrabObject();
             }
         }

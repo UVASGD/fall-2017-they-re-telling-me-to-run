@@ -118,4 +118,14 @@ public class ControllerGrabObject : MonoBehaviour
 
         objectInHand = null;
     }
+
+    public bool IsHandEmpty()
+    {
+        return (objectInHand == null);
+    }
+
+    public bool IsHandFull()
+    {
+        return (objectInHand != null);
+    }
 }

@@ -71,15 +71,23 @@ public class LaserPointer : MonoBehaviour
             // Send out a raycast from the controller
             if (Physics.Raycast(trackedObj.transform.position, transform.forward, out hit, 100, teleportMask))
             {
-                hitPoint = hit.point;
+                if (hit.collider.CompareTag("CanTeleportTo"))
+                {
+                    if (Vector3.Distance(Camera.main.transform.position, hit.point + teleportReticleOffset) <= Globals.MAXIMUM_TELEPORT_DISTANCE) { 
+                        if (this.gameObject.GetComponent<ControllerGrabObject>().IsHandEmpty())
+                        {
+                            hitPoint = hit.point;
 
-                ShowLaser(hit);
+                            ShowLaser(hit);
 
-                //Show teleport reticle
-                reticle.SetActive(true);
-                teleportReticleTransform.position = hitPoint + teleportReticleOffset;
+                            //Show teleport reticle
+                            reticle.SetActive(true);
+                            teleportReticleTransform.position = hitPoint + teleportReticleOffset;
 
-                shouldTeleport = true;
+                            shouldTeleport = true;
+                        }
+                    }
+                }
             }
         }
         else // Touchpad not held down, hide laser & teleport reticle

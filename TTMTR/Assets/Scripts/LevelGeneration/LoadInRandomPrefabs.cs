@@ -7,6 +7,9 @@ public class LoadInRandomPrefabs : MonoBehaviour {
 	[SerializeField]
 	public List<GameObjectAndNumber> objs;
 
+    public bool passDestroyIfCollidesWith;
+    public List<Collider> colliders;
+
 	[System.Serializable]
 	public struct GameObjectAndNumber
 	{
@@ -18,11 +21,17 @@ public class LoadInRandomPrefabs : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		for(int i = 0; i < objs.Count; i++){
+        Debug.Log(colliders.Count);
+
+        for (int i = 0; i < objs.Count; i++){
 			for (int j = 0; j < objs[i].num; j++) {
-				Instantiate (objs[i].obj, this.gameObject.transform);
+				GameObject go = Instantiate (objs[i].obj, this.gameObject.transform);
+                if (passDestroyIfCollidesWith)
+                {
+                    DestroyIfCollidesWith dif = go.AddComponent<DestroyIfCollidesWith>();
+                }
 			}
-		}
+		}  
 	}
 	
 	// Update is called once per frame

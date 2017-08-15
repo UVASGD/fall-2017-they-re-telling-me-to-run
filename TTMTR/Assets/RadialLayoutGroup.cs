@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class RadialLayoutGroup : MonoBehaviour {
 
+    public enum ViewState
+    {
+        fanin,
+        inning,
+        fanout,
+        outing
+    }
+    public ViewState state = ViewState.fanin;
+
     public float yOffset;
     [SerializeField]
     private float rotation;
 
     private float timerOut = 0f;
     private float timerIn = 0f;
-    private float timeToLerp = 1f;
+    private float timeToLerp = 0.3f;
 
 	// Use this for initialization
 	void Start () {
@@ -30,6 +39,7 @@ public class RadialLayoutGroup : MonoBehaviour {
         }
         this.gameObject.SetActive(true);
         timerOut = 0;
+        state = ViewState.outing;
         //StopCoroutine(FanIn());
         StopAllCoroutines();
         StartCoroutine(FanOut());
@@ -39,6 +49,7 @@ public class RadialLayoutGroup : MonoBehaviour {
     {
         timerIn = 0;
         //StopCoroutine(FanOut());
+        state = ViewState.inning;
         StopAllCoroutines();
         StartCoroutine(FanIn());
     }
@@ -54,6 +65,7 @@ public class RadialLayoutGroup : MonoBehaviour {
             timerOut += Time.unscaledDeltaTime;
             yield return null;
         }
+        state = ViewState.fanout;
     }
 
     private IEnumerator FanIn()
@@ -68,6 +80,7 @@ public class RadialLayoutGroup : MonoBehaviour {
             yield return null;
         }
         this.gameObject.SetActive(false);
+        state = ViewState.fanin;
     }
 	
 	// Update is called once per frame

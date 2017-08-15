@@ -56,11 +56,11 @@ public class InventoryViewer : MonoBehaviour
         {
             if (Controller.GetPress(SteamVR_Controller.ButtonMask.Touchpad))
             {
-                if (!view.gameObject.activeSelf)
+                if (view.gameObject.GetComponent<RadialLayoutGroup>().state == RadialLayoutGroup.ViewState.fanin)
                 {
                     view.gameObject.GetComponent<RadialLayoutGroup>().TurnOn();
                 }
-                else
+                else if (view.gameObject.GetComponent<RadialLayoutGroup>().state == RadialLayoutGroup.ViewState.fanout)
                 {
                     view.gameObject.GetComponent<RadialLayoutGroup>().TurnOff();
                 }

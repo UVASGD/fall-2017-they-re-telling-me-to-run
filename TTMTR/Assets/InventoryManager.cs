@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour {
 
+    public GameObject sceneCameraView;
+    public List<Canvas> inventoryViewers;
     public List<GameObject> inventory;
 
 	// Use this for initialization
@@ -25,6 +28,7 @@ public class InventoryManager : MonoBehaviour {
     {
         GameObject go = inventory[index];
         inventory.Remove(go);
+        UpdateVisuals();
         return go;
     }
 
@@ -33,6 +37,7 @@ public class InventoryManager : MonoBehaviour {
         if (inventory.Contains(go))
         {
             inventory.Remove(go);
+            UpdateVisuals();
             return go;
         }
         return null;
@@ -50,5 +55,31 @@ public class InventoryManager : MonoBehaviour {
             return go;
         }
         return null;
+    }
+
+    public void UpdateVisuals()
+    {
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            GameObject item = inventory[i];
+            InventoryItem ii = item.GetComponent<InventoryItem>();
+            if (ii != null)
+            {
+                foreach (Canvas canvas in inventoryViewers)
+                {
+                    if (canvas.transform.childCount > i)
+                    {
+                        canvas.transform.GetChild(i).
+                            GetChild(0).GetComponent<Image>().sprite = ii.sprite;
+                    }
+                }
+                if(sceneCameraView.transform.childCount > i)
+                {
+                    sceneCameraView.transform.GetChild(i).
+                                               GetChild(0).GetComponent<Image>().sprite = ii.sprite;
+                }
+            }
+
+        }
     }
 }

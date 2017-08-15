@@ -97,6 +97,7 @@ public class RadialLayoutGroup : MonoBehaviour {
         float angleDelim = 360 / (transform.childCount - 1);
         int index = 0;
 
+
         
         Debug.Log(index);
         for(int i = 0; i < transform.childCount; i++)

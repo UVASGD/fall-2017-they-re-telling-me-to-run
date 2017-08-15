@@ -22,6 +22,8 @@ public class InventoryManager : MonoBehaviour {
     public void AddObjectToInventory(GameObject go)
     {
         inventory.Add(go);
+        go.SetActive(false);
+        UpdateVisuals();
     }
 
     public GameObject GetObjectInInventoryAt(int index)
@@ -70,11 +72,15 @@ public class InventoryManager : MonoBehaviour {
                     if (canvas.transform.childCount > i)
                     {
                         canvas.transform.GetChild(i).
+                            GetChild(0).gameObject.SetActive(true);
+                        canvas.transform.GetChild(i).
                             GetChild(0).GetComponent<Image>().sprite = ii.sprite;
                     }
                 }
                 if(sceneCameraView.transform.childCount > i)
                 {
+                    sceneCameraView.transform.GetChild(i).
+                            GetChild(0).gameObject.SetActive(true);
                     sceneCameraView.transform.GetChild(i).
                                                GetChild(0).GetComponent<Image>().sprite = ii.sprite;
                 }

@@ -27,6 +27,9 @@ public class ControllerGrabObjectAndTeleport : MonoBehaviour
 
     bool triggerIsDown;
 
+    public InventoryManager IM;
+    public InventoryViewer otherInventoryView;
+
     //----------------------object in hand
     private SteamVR_TrackedObject trackedObj;
 
@@ -139,13 +142,21 @@ public class ControllerGrabObjectAndTeleport : MonoBehaviour
             triggerIsDown = false;
             if (objectInHand)
             {
-                if (objectInHand.tag == "Teleporter")
+                if (objectInHand == otherInventoryView.collidingObject)
                 {
-                    Teleport();
+                    ReleaseObject();
+                    IM.AddObjectToInventory(otherInventoryView.collidingObject);
                 }
                 else
                 {
-                    ReleaseObject();
+                    if (objectInHand.tag == "Teleporter")
+                    {
+                        Teleport();
+                    }
+                    else
+                    {
+                        ReleaseObject();
+                    }
                 }
             }
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RadialLayoutGroup : MonoBehaviour {
 
@@ -14,6 +15,7 @@ public class RadialLayoutGroup : MonoBehaviour {
     public ViewState state = ViewState.fanin;
 
     public float yOffset;
+    public float scale;
     [SerializeField]
     private float rotation;
 
@@ -27,6 +29,7 @@ public class RadialLayoutGroup : MonoBehaviour {
         for(int i = 0; i < transform.childCount; i++)
         {
             transform.GetChild(i).Rotate(0,0, rotation * i);
+            transform.GetChild(i).localScale = Vector3.zero;
             //transform.GetChild(i).Translate(new Vector3(0, yOffset, 0));
         }
     }
@@ -36,11 +39,11 @@ public class RadialLayoutGroup : MonoBehaviour {
         for (int i = 0; i < transform.childCount; i++)
         {
             transform.GetChild(i).localPosition = Vector3.zero;
+            transform.GetChild(i).localScale = Vector3.zero;
         }
         this.gameObject.SetActive(true);
         timerOut = 0;
         state = ViewState.outing;
-        //StopCoroutine(FanIn());
         StopAllCoroutines();
         StartCoroutine(FanOut());
     }
@@ -48,7 +51,6 @@ public class RadialLayoutGroup : MonoBehaviour {
     public void TurnOff()
     {
         timerIn = 0;
-        //StopCoroutine(FanOut());
         state = ViewState.inning;
         StopAllCoroutines();
         StartCoroutine(FanIn());
@@ -61,6 +63,7 @@ public class RadialLayoutGroup : MonoBehaviour {
             for(int i = 0; i < transform.childCount; i++)
             {
                 transform.GetChild(i).Translate(new Vector3(0, yOffset * Time.unscaledDeltaTime, 0));
+                transform.GetChild(i).localScale = new Vector3(scale * (timerOut/timeToLerp), scale * (timerOut / timeToLerp), 0);
             }
             timerOut += Time.unscaledDeltaTime;
             yield return null;
@@ -75,6 +78,7 @@ public class RadialLayoutGroup : MonoBehaviour {
             for (int i = 0; i < transform.childCount; i++)
             {
                 transform.GetChild(i).Translate(new Vector3(0, -1 * yOffset * Time.unscaledDeltaTime, 0));
+                transform.GetChild(i).localScale = new Vector3(scale * (1-(timerIn / timeToLerp)), scale * (1-(timerIn / timeToLerp)), 0);
             }
             timerIn += Time.unscaledDeltaTime;
             yield return null;
@@ -88,5 +92,23 @@ public class RadialLayoutGroup : MonoBehaviour {
         
 	}
 
-   
+    public void Highlight(float angle)
+    {
+        float angleDelim = 360 / (transform.childCount - 1);
+        int index = 0;
+
+        
+        Debug.Log(index);
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            if(i == index)
+            {
+                transform.GetChild(i).GetComponent<Image>().color = Color.red;
+            }
+            else
+            {
+                transform.GetChild(i).GetComponent<Image>().color = Color.white;
+            }
+        }
+    }
 }

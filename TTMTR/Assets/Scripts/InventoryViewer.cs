@@ -54,7 +54,8 @@ public class InventoryViewer : MonoBehaviour
         float xTouch = Controller.GetAxis(Valve.VR.EVRButtonId.k_EButton_Axis0)[0];
         float yTouch = Controller.GetAxis(Valve.VR.EVRButtonId.k_EButton_Axis0)[1];
 
-        float angle = Mathf.Atan2(yTouch, xTouch) * Mathf.Rad2Deg + 180;
+        float angle = Mathf.Atan2 (yTouch, xTouch) * Mathf.Rad2Deg - 90;
+		if (angle < 0) angle += 360f;
         Debug.Log(angle);
         view.GetComponent<RadialLayoutGroup>().Highlight(angle);
         //Debug.Log(Vector2.Angle(Vector2.zero, new Vector2(xTouch, yTouch)));

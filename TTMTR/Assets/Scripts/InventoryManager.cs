@@ -21,9 +21,16 @@ public class InventoryManager : MonoBehaviour {
 
     public void AddObjectToInventory(GameObject go)
     {
-        inventory.Add(go);
-        go.SetActive(false);
-        UpdateVisuals();
+        if (go.GetComponent<InventoryItem>() != null)
+        {
+            if (!inventory.Contains(go))
+            {
+                inventory.Add(go);
+                go.SetActive(false);
+                go.GetComponent<InventoryItem>().useable = false;
+                UpdateVisuals();
+            }
+        }
     }
 
     public GameObject GetObjectInInventoryAt(int index)
@@ -61,12 +68,28 @@ public class InventoryManager : MonoBehaviour {
 
     public void UpdateVisuals()
     {
+        foreach(Canvas canvas in inventoryViewers)
+        {
+            for(int i = 0; i < canvas.transform.childCount; i++)
+            {
+                canvas.transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite = null;
+                canvas.transform.GetChild(i).GetChild(0).gameObject.SetActive(false);
+            }
+        }
+        for(int i = 0; i < sceneCameraView.transform.childCount; i++)
+        {
+            sceneCameraView.transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite = null;
+            sceneCameraView.transform.GetChild(i).GetChild(0).gameObject.SetActive(false);
+        }
+
+
         for (int i = 0; i < inventory.Count; i++)
         {
             GameObject item = inventory[i];
             InventoryItem ii = item.GetComponent<InventoryItem>();
             if (ii != null)
             {
+                Debug.Log("inventory item component non null");
                 foreach (Canvas canvas in inventoryViewers)
                 {
                     if (canvas.transform.childCount > i)

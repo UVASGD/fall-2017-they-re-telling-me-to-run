@@ -35,7 +35,7 @@ public class ControllerGrabObjectAndTeleport : MonoBehaviour
 
     public GameObject collidingObject;
     [SerializeField]
-    private GameObject objectInHand;
+    public GameObject objectInHand;
     // -------------------------------------
 
     //teleporting 
@@ -75,6 +75,11 @@ public class ControllerGrabObjectAndTeleport : MonoBehaviour
         laserTransform = laser.transform;
     }
 
+    public bool IsHandEmptyAndAlone()
+    {
+        return objectInHand == null && collidingObject == null;
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         SetCollidingObject(other);
@@ -112,7 +117,10 @@ public class ControllerGrabObjectAndTeleport : MonoBehaviour
             triggerIsDown = true;
             if (objectInHand && objectInHand.tag == "Teleporter")
             {
-                SearchForTeleport();
+                if (objectInHand.GetComponent<InventoryItem>().useable)
+                {
+                    SearchForTeleport();
+                }
             }
             else
             {
@@ -120,6 +128,7 @@ public class ControllerGrabObjectAndTeleport : MonoBehaviour
                 {
                     Debug.Log("I should grab " + collidingObject.name);
                     GrabObject();
+                    GetComponent<InventoryViewer>().view.GetComponent<RadialLayoutGroup>().TurnOff();
                 }
             }
         }
@@ -133,7 +142,10 @@ public class ControllerGrabObjectAndTeleport : MonoBehaviour
         {
             if (objectInHand && objectInHand.tag == "Teleporter")
             {
-                SearchForTeleport();
+                if (objectInHand.GetComponent<InventoryItem>().useable)
+                {
+                    SearchForTeleport();
+                }
             }
         }
 
@@ -146,17 +158,27 @@ public class ControllerGrabObjectAndTeleport : MonoBehaviour
                 {
                     ReleaseObject();
                     IM.AddObjectToInventory(otherInventoryView.collidingObject);
+                    otherInventoryView.collidingObject = null;
                 }
                 else
                 {
                     if (objectInHand.tag == "Teleporter")
                     {
-                        Teleport();
+                        if (objectInHand.GetComponent<InventoryItem>().useable)
+                        {
+                            Teleport();
+                        }
                     }
                     else
                     {
                         ReleaseObject();
                     }
+                }
+
+                InventoryItem ii = objectInHand.GetComponent<InventoryItem>();
+                if (ii != null)
+                {
+                    ii.useable = true;
                 }
             }
         }
@@ -210,8 +232,11 @@ public class ControllerGrabObjectAndTeleport : MonoBehaviour
     {
         objectInHand = collidingObject;
         collidingObject = null;
+        objectInHand.SetActive(true);
         var joint = AddFixedJoint();
         joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
+        InventoryManager IM = GetComponent<InventoryViewer>().IM;
+        IM.GetObjectInInventory(objectInHand); 
     }
 
     private FixedJoint AddFixedJoint()
@@ -222,7 +247,7 @@ public class ControllerGrabObjectAndTeleport : MonoBehaviour
         return fx;
     }
 
-    private void ReleaseObject()
+    public void ReleaseObject()
     {
         if (GetComponent<FixedJoint>())
         {

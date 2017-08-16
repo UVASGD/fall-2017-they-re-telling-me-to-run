@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class RadialLayoutGroup : MonoBehaviour {
+
+    public Action<int, int> OnSelectionChanged;
 
     public enum ViewState
     {
@@ -22,6 +25,8 @@ public class RadialLayoutGroup : MonoBehaviour {
     private float timerOut = 0f;
     private float timerIn = 0f;
     private float timeToLerp = 0.3f;
+
+    public int selectedIndex = -1;
 
 	// Use this for initialization
 	void Start () {
@@ -95,25 +100,33 @@ public class RadialLayoutGroup : MonoBehaviour {
     public void Highlight(float angle)
     {
         float angleDelim = 360 / transform.childCount;
-	float offset = angleDelim / 2;
-	float angleIter = offset;
+	    float offset = angleDelim / 2;
+	    float angleIter = offset;
         int index = 0;
-	while (angleIter < angle){
-		index++;
-		angleIter+= angleDelim;
-	}
-	index = index % transform.childCount;
-	    
-        Debug.Log(index);
-        for(int i = 0; i < transform.childCount; i++)
+	    while (angleIter < angle)
         {
-            if(i == index)
+		    index++;
+		    angleIter+= angleDelim;
+	    }
+	    index = index % transform.childCount;
+        //Debug.Log(index);
+        if (index != selectedIndex)
+        {
+            if (OnSelectionChanged != null)
             {
-                transform.GetChild(i).GetComponent<Image>().color = Color.red;
+                OnSelectionChanged(selectedIndex, index);
             }
-            else
+            selectedIndex = index;
+            for (int i = 0; i < transform.childCount; i++)
             {
-                transform.GetChild(i).GetComponent<Image>().color = Color.white;
+                if (i == index)
+                {
+                    transform.GetChild(i).GetComponent<Image>().color = Color.red;
+                }
+                else
+                {
+                    transform.GetChild(i).GetComponent<Image>().color = Color.white;
+                }
             }
         }
     }

@@ -46,18 +46,31 @@ public class InventoryViewer : MonoBehaviour
     //new
     void Start()
     {
-
+        view.GetComponent<RadialLayoutGroup>().OnSelectionChanged = (oldINdex, newIndex) =>
+        {
+            ControllerGrabObjectAndTeleport cgoat = GetComponent<ControllerGrabObjectAndTeleport>();
+            if (IM.inventory.Count > newIndex)
+            {
+                if (cgoat.IsHandEmptyAndAlone())
+                {
+                    cgoat.collidingObject = IM.inventory[newIndex];
+                }
+            }
+        };
     }
 
     void Update()
     {
-        float xTouch = Controller.GetAxis(Valve.VR.EVRButtonId.k_EButton_Axis0)[0];
-        float yTouch = Controller.GetAxis(Valve.VR.EVRButtonId.k_EButton_Axis0)[1];
+        if (view.GetComponent<RadialLayoutGroup>().state == RadialLayoutGroup.ViewState.fanout)
+        {
+            float xTouch = Controller.GetAxis(Valve.VR.EVRButtonId.k_EButton_Axis0)[0];
+            float yTouch = Controller.GetAxis(Valve.VR.EVRButtonId.k_EButton_Axis0)[1];
 
-        float angle = Mathf.Atan2 (yTouch, xTouch) * Mathf.Rad2Deg - 90;
-		if (angle < 0) angle += 360f;
-        Debug.Log(angle);
-        view.GetComponent<RadialLayoutGroup>().Highlight(angle);
+            float angle = Mathf.Atan2(yTouch, xTouch) * Mathf.Rad2Deg - 90;
+            if (angle < 0) angle += 360f;
+            //Debug.Log(angle);
+            view.GetComponent<RadialLayoutGroup>().Highlight(angle);
+        }
         //Debug.Log(Vector2.Angle(Vector2.zero, new Vector2(xTouch, yTouch)));
 
         // Is the touchpad held down?
@@ -72,6 +85,10 @@ public class InventoryViewer : MonoBehaviour
                 else if (view.gameObject.GetComponent<RadialLayoutGroup>().state == RadialLayoutGroup.ViewState.fanout)
                 {
                     view.gameObject.GetComponent<RadialLayoutGroup>().TurnOff();
+                    if (IM.inventory.Contains(GetComponent<ControllerGrabObjectAndTeleport>().collidingObject))
+                    {
+                        GetComponent<ControllerGrabObjectAndTeleport>().collidingObject = null;
+                    }
                 }
                 waitBuffer = 0;
             }

@@ -94,8 +94,14 @@ public class RadialLayoutGroup : MonoBehaviour {
 
     public void Highlight(float angle)
     {
-        float angleDelim = 360 / (transform.childCount - 1);
+        float angleDelim = 360 / transform.childCount;
+	float offset = angleDelim / 2;
+	float angleIter = offset;
         int index = 0;
+	while (angleIter < angle){
+		index++;
+		angleIter+= angleDelim;
+	}
 
 
         

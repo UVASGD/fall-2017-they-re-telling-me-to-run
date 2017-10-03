@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
+	bool isAlive = true;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -12,5 +14,10 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	// Function that handles loss conditions
+	public void failure() {
+		Debug.Log ("You lost");
 	}
 }

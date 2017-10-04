@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class AIController : MonoBehaviour {
 
+	public Transform goal;
+
+	public UnityEngine.AI.NavMeshAgent navAgent;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -11,6 +15,6 @@ public class AIController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		navAgent.destination = goal.position;
 	}
 }

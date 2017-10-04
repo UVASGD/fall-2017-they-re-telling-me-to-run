@@ -6,4 +6,7 @@ public class InventoryItem : MonoBehaviour {
 
     public Sprite sprite;
     public bool useable = true;
+    public bool craftable = true;
+
+	public string name = "";
 }

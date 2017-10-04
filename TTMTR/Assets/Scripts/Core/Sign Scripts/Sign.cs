@@ -9,9 +9,15 @@ public class Sign : MonoBehaviour {
 	void Start () {
         GameObject sign = GameObject.Instantiate(prefabs[Random.Range(0,prefabs.Count)], this.transform);
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawRay(transform.position, transform.up);
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }

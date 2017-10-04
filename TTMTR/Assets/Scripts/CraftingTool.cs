@@ -5,10 +5,16 @@ using UnityEngine;
 public class CraftingTool : MonoBehaviour {
 
     List<InventoryItem> listOfInternalItems = new List<InventoryItem>();
+	static Dictionary<InventoryItem, List<InventoryItem>> recipes = new Dictionary<InventoryItem, List<InventoryItem>>();
 
 	// Use this for initialization
 	void Start () {
 		Debug.Log("hello I'm a crafting tool!2");
+		List<string> items = new List<string> ();
+		items.Add ("ingredient1");
+		items.Add ("ingredient2");
+		items.Add ("ingredient3");
+		AddRecipe ("ITEMMM", items);
 	}
 	
 	// Update is called once per frame
@@ -36,4 +42,20 @@ public class CraftingTool : MonoBehaviour {
         }
 
 	}
+
+	void AddRecipe(string name, List<string> ingredients) {
+		InventoryItem item = new InventoryItem ();
+		item.name = name;
+		List<InventoryItem> itemIngredients = new List<InventoryItem> ();
+
+		foreach (string i in ingredients) {
+			InventoryItem item2 = new InventoryItem ();
+			item2.name = i;
+			itemIngredients.Add (item2);
+		}
+
+		recipes.Add (item, itemIngredients);
+		Debug.Log ("Recipe added" + recipes.ToString);
+	}
+
 }

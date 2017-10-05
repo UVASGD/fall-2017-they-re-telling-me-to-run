@@ -55,7 +55,7 @@ public class CraftingTool : MonoBehaviour {
 		}
 
 		recipes.Add (item, itemIngredients);
-		Debug.Log ("Recipe added" + recipes.ToString);
+		Debug.Log ("Recipe added" + recipes.ToString());
 	}
 
 }

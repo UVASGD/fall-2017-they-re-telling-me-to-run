@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
-	bool isAlive = true;
+	string gameOverScene = "Assets/Scenes/Test_Scenes/Laura_End_Scene.unity";
+	string winScene = "";
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +19,13 @@ public class GameController : MonoBehaviour {
 	}
 
 	// Function that handles loss conditions
-	public void failure() {
+	public void loseGame() {
 		Debug.Log ("You lost");
+		SceneManager.LoadScene (gameOverScene, LoadSceneMode.Single);
+	}
+
+	public void winGame() {
+		Debug.Log ("You win");
+		SceneManager.LoadScene (winScene, LoadSceneMode.Single);
 	}
 }

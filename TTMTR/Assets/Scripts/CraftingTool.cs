@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class CraftingTool : MonoBehaviour {
 
+	public struct Recipe {
+		public InventoryItem creation;
+		public List<InventoryItem> ingredients;
+
+		public Recipe(InventoryItem item, List<InventoryItem> itemIngreds) {
+			creation = item;
+			ingredients = itemIngreds;
+		}
+	}
+
     List<InventoryItem> listOfInternalItems = new List<InventoryItem>();
-	static Dictionary<InventoryItem, List<InventoryItem>> recipes = new Dictionary<InventoryItem, List<InventoryItem>>();
+	static List<Recipe> recipes = new List<Recipe>();
 
 	// Use this for initialization
 	void Start () {
@@ -19,9 +29,9 @@ public class CraftingTool : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log("here's our list of internal items:");
-        Debug.Log(listOfInternalItems[0]);
-        Debug.Log(listOfInternalItems.Count);
+        //Debug.Log("here's our list of internal items:");
+        //Debug.Log(listOfInternalItems[0]);
+        //Debug.Log(listOfInternalItems.Count);
 	}
 
 	void OnTriggerEnter(Collider other) {
@@ -43,6 +53,8 @@ public class CraftingTool : MonoBehaviour {
 
 	}
 
+
+
 	void AddRecipe(string name, List<string> ingredients) {
 		InventoryItem item = new InventoryItem ();
 		item.name = name;
@@ -54,8 +66,18 @@ public class CraftingTool : MonoBehaviour {
 			itemIngredients.Add (item2);
 		}
 
-		recipes.Add (item, itemIngredients);
-		Debug.Log ("Recipe added" + recipes.ToString);
+		recipes.Add (new Recipe(item, itemIngredients));
+
+		Debug.Log ("~recipes thus far~");
+		foreach (Recipe r in recipes) {
+			Debug.Log (r.creation.name);
+
+			foreach (InventoryItem i in r.ingredients) {
+				System.Control.Write (i.name);
+			}
+		}
+
 	}
+
 
 }

@@ -5,12 +5,14 @@ using UnityEngine;
 public class SignController : MonoBehaviour {
 
     // Use this for initialization
-    public Sign[] signMarkers;
+    private SignSpawn[] signMarkers;
     public List<GameObject> possibleSigns;
-	void Awake () {
-        foreach(Sign sign in signMarkers)
+	void Start () {
+        signMarkers = FindObjectsOfType(typeof(SignSpawn)) as SignSpawn[];
+        foreach(SignSpawn sign in signMarkers)
         {
-            sign.prefabs = possibleSigns;
+            if(sign.prefab == null) sign.prefab = possibleSigns[Random.Range(0,possibleSigns.Count)];
+            sign.spawnSign();
         }
 	}
 	

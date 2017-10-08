@@ -21,8 +21,8 @@ public class CraftingTool : MonoBehaviour {
 	void Start () {
 		Debug.Log("hello I'm a crafting tool!2");
 		Dictionary<string, int> items = new Dictionary<string, int> ();
-		items.Add ("Capsule", 3);
-		AddRecipe ("Sphere", items);
+		items.Add ("Teleporter", 3);
+		AddRecipe ("Teleporter", items);
 	}
 	
 	// Update is called once per frame
@@ -53,8 +53,7 @@ public class CraftingTool : MonoBehaviour {
 				} else {
 					listOfInternalItems.Add(script.name, 1);
 				}
-                go.SetActive(false);
-                go.GetComponent<InventoryItem>().useable = false;
+				Destroy (go);
 				CheckRecipes ();
             }
 
@@ -75,6 +74,7 @@ public class CraftingTool : MonoBehaviour {
 			}
 			if (haveItems) {
 				Debug.Log ("we have a match!");
+				ThrowOut ();
 			}
 		}
 
@@ -105,7 +105,7 @@ public class CraftingTool : MonoBehaviour {
     {
 
         GameObject instance = Instantiate(Resources.Load("Prefabs/Objects/Teleporter", typeof(GameObject))) as GameObject;
-        instance.transform.position = new Vector3(x: 5, y: 5, z: 5);
+        instance.transform.position = new Vector3(x: 1, y: 2, z: 2);
 
     }
 

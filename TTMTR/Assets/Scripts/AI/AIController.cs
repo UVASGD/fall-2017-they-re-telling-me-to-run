@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIController : MonoBehaviour {
+public class AIController : MonoBehaviour, Detector {
 	
 	public UnityEngine.AI.NavMeshAgent navAgent;
 
@@ -12,22 +12,26 @@ public class AIController : MonoBehaviour {
 
 	public List<Transform> wanderPoints;
 
-	Transform curDest;
+	Vector3 curDest;
 
 	// Use this for initialization
 	void Start () {
-		curDest = gameObject.transform;
+		curDest = gameObject.transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (Vector3.Distance(player.transform.position, gameObject.transform.position) < playerVisualDistance) {
-			curDest = player.transform;
+			curDest = player.transform.position;
 		} else {
-			if (Vector3.Distance(curDest.position, gameObject.transform.position) < 0.5f) {
-				curDest = wanderPoints[Random.Range(0, wanderPoints.Count)];
+			if (Vector3.Distance(curDest, gameObject.transform.position) < 0.5f) {
+				curDest = wanderPoints[Random.Range(0, wanderPoints.Count)].position;
 			}
 		}
-		navAgent.destination = curDest.position;
+		navAgent.destination = curDest;
+	}
+
+	public void Detect(Vector3 position) {
+		curDest = position;
 	}
 }

@@ -5,16 +5,16 @@ using UnityEngine;
 public class CraftingTool : MonoBehaviour {
 
 	public struct Recipe {
-		public InventoryItem creation;
-		public List<InventoryItem> ingredients;
+		public string creation;
+		public Dictionary<string, int> ingredients = new Dictionary<string, int>();
 
-		public Recipe(InventoryItem item, List<InventoryItem> itemIngreds) {
+		public Recipe(string item, Dictionary<string, int> itemIngreds) {
 			creation = item;
 			ingredients = itemIngreds;
 		}
 	}
 
-    List<InventoryItem> listOfInternalItems = new List<InventoryItem>();
+	public Dictionary<string, int> listOfInternalItems = new Dictionary<string, int>();
 	static List<Recipe> recipes = new List<Recipe>();
 
 	// Use this for initialization
@@ -46,7 +46,7 @@ public class CraftingTool : MonoBehaviour {
                 listOfInternalItems.Add(script);
                 go.SetActive(false);
                 go.GetComponent<InventoryItem>().useable = false;
-
+				CheckRecipes ();
             }
 
         }
@@ -55,29 +55,21 @@ public class CraftingTool : MonoBehaviour {
 
 	// Check to see if our ingredients match any recipe
 	void CheckRecipes() {
-		 
+		Dictionary<string, int> 
 
 	}
 
-	void AddRecipe(string name, List<string> ingredients) {
-		InventoryItem item = new InventoryItem ();
-		item.name = name;
-		List<InventoryItem> itemIngredients = new List<InventoryItem> ();
+	void AddRecipe(string name, Dictionary<string, int> ingredients) {
 
-		foreach (string i in ingredients) {
-			InventoryItem item2 = new InventoryItem ();
-			item2.name = i;
-			itemIngredients.Add (item2);
-		}
 
-		recipes.Add (new Recipe(item, itemIngredients));
+		recipes.Add (new Recipe(name, ingredients));
 
 		Debug.Log ("~recipes thus far~");
 		foreach (Recipe r in recipes) {
-			Debug.Log (r.creation.name);
+			Debug.Log (r.creation);
 
-			foreach (InventoryItem i in r.ingredients) {
-				Debug.Log (i.name);
+			foreach (KeyValuePair<string, int> i in r.ingredients) {
+				Debug.Log (i.Key + "amount: " + i.Value);
 			}
 		}
 

@@ -21,10 +21,10 @@ public class CraftingTool : MonoBehaviour {
 	void Start () {
 		Debug.Log("hello I'm a crafting tool!2");
 		List<string> items = new List<string> ();
-		items.Add ("ingredient1");
-		items.Add ("ingredient2");
-		items.Add ("ingredient3");
-		AddRecipe ("ITEMMM", items);
+		items.Add ("Capsule");
+		items.Add ("Capsule");
+		items.Add ("Capsule");
+		AddRecipe ("Sphere", items);
 	}
 	
 	// Update is called once per frame
@@ -53,7 +53,11 @@ public class CraftingTool : MonoBehaviour {
 
 	}
 
+	// Check to see if our ingredients match any recipe
+	void CheckRecipes() {
+		 
 
+	}
 
 	void AddRecipe(string name, List<string> ingredients) {
 		InventoryItem item = new InventoryItem ();
@@ -73,7 +77,7 @@ public class CraftingTool : MonoBehaviour {
 			Debug.Log (r.creation.name);
 
 			foreach (InventoryItem i in r.ingredients) {
-				System.Control.Write (i.name);
+				Debug.Log (i.name);
 			}
 		}
 

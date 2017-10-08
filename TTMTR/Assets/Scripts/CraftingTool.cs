@@ -6,7 +6,7 @@ public class CraftingTool : MonoBehaviour {
 
 	public struct Recipe {
 		public string creation;
-		public Dictionary<string, int> ingredients = new Dictionary<string, int>();
+		public Dictionary<string, int> ingredients;
 
 		public Recipe(string item, Dictionary<string, int> itemIngreds) {
 			creation = item;
@@ -20,10 +20,8 @@ public class CraftingTool : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Debug.Log("hello I'm a crafting tool!2");
-		List<string> items = new List<string> ();
-		items.Add ("Capsule");
-		items.Add ("Capsule");
-		items.Add ("Capsule");
+		Dictionary<string, int> items = new Dictionary<string, int> ();
+		items.Add ("Capsule", 3);
 		AddRecipe ("Sphere", items);
 	}
 	
@@ -48,8 +46,13 @@ public class CraftingTool : MonoBehaviour {
 
         if (script != null) {
             if (script.craftable == true) {
-
-                listOfInternalItems.Add(script);
+				if (listOfInternalItems.ContainsKey (script.name)) {
+					int amount = 0;
+					listOfInternalItems.TryGetValue (script.name, out amount);
+					listOfInternalItems[script.name] = amount + 1;
+				} else {
+					listOfInternalItems.Add(script.name, 1);
+				}
                 go.SetActive(false);
                 go.GetComponent<InventoryItem>().useable = false;
 				CheckRecipes ();
@@ -61,9 +64,22 @@ public class CraftingTool : MonoBehaviour {
 
 	// Check to see if our ingredients match any recipe
 	void CheckRecipes() {
-		Dictionary<string, int> 
+		foreach (Recipe r in recipes) {
+			bool haveItems = true;
+			foreach (KeyValuePair<string, int> i in r.ingredients) {
+					int amount = 0;
+					listOfInternalItems.TryGetValue (i.Key, out amount);
+						if (amount < i.Value) {
+							haveItems = false;
+						}
+			}
+			if (haveItems) {
+				Debug.Log ("we have a match!");
+			}
+		}
 
-	}
+		}
+		
 
 	void AddRecipe(string name, Dictionary<string, int> ingredients) {
 

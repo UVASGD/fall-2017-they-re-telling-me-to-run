@@ -32,6 +32,12 @@ public class CraftingTool : MonoBehaviour {
         //Debug.Log("here's our list of internal items:");
         //Debug.Log(listOfInternalItems[0]);
         //Debug.Log(listOfInternalItems.Count);
+
+        //will spawn all held objects when the spacebar is clicked
+        //is a temporary solution
+        if (Input.GetKeyDown("space")) {
+            ReleaseHeldObjects();
+        }
 	}
 
 	void OnTriggerEnter(Collider other) {
@@ -75,5 +81,33 @@ public class CraftingTool : MonoBehaviour {
 
 	}
 
+    //will spawn the passed object into the map near the crafting table
+    //To do - determine the crafting tables location and spawn near it
+    //      - instantiate a specific object not just a teleporter
+    //      - once this is proerly implemented fix up method ReleaseHeldObjects
+    void ThrowOut()
+    {
+
+        GameObject instance = Instantiate(Resources.Load("Prefabs/Objects/Teleporter", typeof(GameObject))) as GameObject;
+        instance.transform.position = new Vector3(x: 5, y: 5, z: 5);
+
+    }
+
+    //Will spawn all held objects into the game
+    //tempporarily weird until method ThrowOut is implemented
+    void ReleaseHeldObjects()
+    {
+
+        ThrowOut();
+
+        /*
+        for(int i = listOfInternalItems.Count; i >= 0; i--) {
+
+            ThrowOut(listOfInternalItems[i]);
+            listOfInternalItems.Remove(listOfInternalItems[i]);
+
+        }
+        */
+    }
 
 }

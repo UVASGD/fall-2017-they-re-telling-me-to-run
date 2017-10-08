@@ -6,13 +6,9 @@ public class SoundReceiver : MonoBehaviour {
 	
 	public float soundThreshold;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	public Detector detector;
+
+	public virtual void Receive(float intensity, Vector3 position) {
+		detector.Detect(position);
 	}
 }

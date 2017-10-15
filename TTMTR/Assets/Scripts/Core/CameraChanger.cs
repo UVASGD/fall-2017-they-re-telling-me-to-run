@@ -17,7 +17,7 @@ public class CameraChanger : MonoBehaviour {
                 this.gameObject.SetActive(false);
             }
         }
-        UnityEngine.VR.VRSettings.showDeviceView = Globals.MATCH_DISPLAYS_FOR_HMD_AND_MONITOR; // run this line regardless of if in unity editor or not
+        UnityEngine.XR.XRSettings.showDeviceView = Globals.MATCH_DISPLAYS_FOR_HMD_AND_MONITOR; // run this line regardless of if in unity editor or not
     }
 	
 }

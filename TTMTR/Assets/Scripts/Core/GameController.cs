@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour {
 
 	string gameOverScene = "Assets/Scenes/Test_Scenes/Laura_End_Scene.unity";
-	string winScene = "";
+	string winScene = "Assets/Scenes/Test_Scenes/Talia_Win_Scene.unity";
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +15,8 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+
 	}
 
 	// Function that handles loss conditions

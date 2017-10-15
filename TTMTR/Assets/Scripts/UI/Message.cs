@@ -14,10 +14,12 @@ public class Message : MonoBehaviour {
 		
 	}
 
-	public IEnumerator DisplayMessage(string message) {
+
+	// add param for length
+	public IEnumerator DisplayMessage(string message, float seconds) {
 		GetComponent<UnityEngine.UI.Text> ().text = message;
 		// wait like 5 seconds
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(seconds);
 		// call clear message
 		ClearMessage();
 

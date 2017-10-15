@@ -27,7 +27,7 @@ public class Nest : MonoBehaviour {
 				Destroy (collision.gameObject);
 				gameController.GetComponent<GameController>().winGame ();
 			} else {
-				StartCoroutine(message.GetComponent<Message>().DisplayMessage ("Sorry you can't combine these"));
+				StartCoroutine(message.GetComponent<Message>().DisplayMessage ("Sorry you can't combine these", 3));
 			} 
 		}
 	}

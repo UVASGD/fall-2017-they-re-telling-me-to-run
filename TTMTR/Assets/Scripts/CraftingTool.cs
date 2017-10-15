@@ -17,20 +17,19 @@ public class CraftingTool : MonoBehaviour {
 	public Dictionary<string, int> listOfInternalItems = new Dictionary<string, int>();
 	static List<Recipe> recipes = new List<Recipe>();
 
-	// Use this for initialization
 	void Start () {
-		Debug.Log("hello I'm a crafting tool!2");
-		Dictionary<string, int> items = new Dictionary<string, int> ();
-		items.Add ("Teleporter", 3);
-		AddRecipe ("Teleporter", items);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        //Debug.Log("here's our list of internal items:");
-        //Debug.Log(listOfInternalItems[0]);
-        //Debug.Log(listOfInternalItems.Count);
+		// Test Recipes
+		Dictionary<string, int> testRecipe1 = new Dictionary<string, int> ();
+		testRecipe1.Add ("Teleporter", 3);
+		AddRecipe ("Teleporter", testRecipe1);
 
+		Dictionary<string, int> testRecipe2 = new Dictionary<string, int> ();
+		testRecipe2.Add ("Spoon", 2);
+		testRecipe2.Add ("Wand", 1);
+		AddRecipe ("Cauldron", testRecipe2);
+	}
+
+	void Update () {
         //will spawn all held objects when the spacebar is clicked
         if (Input.GetKeyDown("space")) {
             ReleaseHeldObjects();
@@ -38,8 +37,6 @@ public class CraftingTool : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-	    Debug.Log("I've triggered something " + other.name);
-
         InventoryItem script = other.gameObject.GetComponent(typeof(InventoryItem)) as InventoryItem;
         GameObject go = other.gameObject;
 
@@ -64,16 +61,21 @@ public class CraftingTool : MonoBehaviour {
 	void CheckRecipes() {
 		foreach (Recipe r in recipes) {
 			bool haveItems = true;
-			foreach (KeyValuePair<string, int> i in r.ingredients) {
-					int amount = 0;
-					listOfInternalItems.TryGetValue (i.Key, out amount);
-						if (amount < i.Value) {
-							haveItems = false;
-						}
+			KeyValuePair<string, int> ingredientsToThrowOut = new KeyValuePair<string, int>();
+			foreach (KeyValuePair<string, int> ingredient in r.ingredients) {
+				int amount = 0;
+				listOfInternalItems.TryGetValue (ingredient.Key, out amount);
+				if (amount < ingredient.Value) {
+					haveItems = false;
+				}
 			}
 			if (haveItems) {
-				Debug.Log ("we have a match!");
+				// Spawn new item
 				ThrowOut (r.creation);
+				// Delete ingredients from listOfInternalItems
+				foreach (KeyValuePair<string, int> ingredient in r.ingredients) {
+					listOfInternalItems [ingredient.Key] = listOfInternalItems [ingredient.Key] - ingredient.Value;
+				}
 			}
 
 		}
@@ -82,25 +84,11 @@ public class CraftingTool : MonoBehaviour {
 		
 
 	void AddRecipe(string name, Dictionary<string, int> ingredients) {
-
-
 		recipes.Add (new Recipe(name, ingredients));
-
-		Debug.Log ("~recipes thus far~");
-		foreach (Recipe r in recipes) {
-			Debug.Log (r.creation);
-
-			foreach (KeyValuePair<string, int> i in r.ingredients) {
-				Debug.Log (i.Key + "amount: " + i.Value);
-			}
-		}
-
 	}
 
     //will spawn the passed object into the map near the crafting table
     //To do - determine the crafting tables location and spawn near it
-    //      - instantiate a specific object not just a teleporter
-    //      - once this is proerly implemented fix up method ReleaseHeldObjects
     void ThrowOut(string name) {
 
         GameObject instance = Instantiate(Resources.Load("Prefabs/Objects/" + name, typeof(GameObject))) as GameObject;
@@ -110,9 +98,8 @@ public class CraftingTool : MonoBehaviour {
 
     //Will spawn all held objects into the game
     void ReleaseHeldObjects() {
-
-        foreach (string x in listOfInternalItems.Keys) {
-
+		foreach (string x in listOfInternalItems.Keys) {
+			
             int amount = 0;
             listOfInternalItems.TryGetValue(x, out amount);
 
@@ -120,9 +107,9 @@ public class CraftingTool : MonoBehaviour {
                 ThrowOut(x);
             }
 
-            listOfInternalItems.Remove(x);
-
         }
+
+		listOfInternalItems.Clear ();
     }
 
 }

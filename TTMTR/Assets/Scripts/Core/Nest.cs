@@ -6,6 +6,7 @@ public class Nest : MonoBehaviour {
 
 	List<string> combinables = new List<string>{"potato", "taco"};
 	public UnityEngine.UI.Text message;
+	public GameObject gameController;
 
 	// Use this for initialization
 	void Start () {
@@ -24,7 +25,7 @@ public class Nest : MonoBehaviour {
 		if (other != null) {
 			if (combinables.Contains (other.name)) {
 				Destroy (collision.gameObject);
-				//this.GetComponent<GameController> ().winGame ();
+				gameController.GetComponent<GameController>().winGame ();
 			} else {
 				StartCoroutine(message.GetComponent<Message>().DisplayMessage ("Sorry you can't combine these"));
 			} 

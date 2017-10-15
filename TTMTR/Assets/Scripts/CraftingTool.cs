@@ -32,7 +32,6 @@ public class CraftingTool : MonoBehaviour {
         //Debug.Log(listOfInternalItems.Count);
 
         //will spawn all held objects when the spacebar is clicked
-        //is a temporary solution
         if (Input.GetKeyDown("space")) {
             ReleaseHeldObjects();
         }
@@ -74,11 +73,12 @@ public class CraftingTool : MonoBehaviour {
 			}
 			if (haveItems) {
 				Debug.Log ("we have a match!");
-				ThrowOut ();
+				ThrowOut (r.creation);
 			}
-		}
 
 		}
+
+	}
 		
 
 	void AddRecipe(string name, Dictionary<string, int> ingredients) {
@@ -101,29 +101,28 @@ public class CraftingTool : MonoBehaviour {
     //To do - determine the crafting tables location and spawn near it
     //      - instantiate a specific object not just a teleporter
     //      - once this is proerly implemented fix up method ReleaseHeldObjects
-    void ThrowOut()
-    {
+    void ThrowOut(string name) {
 
-        GameObject instance = Instantiate(Resources.Load("Prefabs/Objects/Teleporter", typeof(GameObject))) as GameObject;
+        GameObject instance = Instantiate(Resources.Load("Prefabs/Objects/" + name, typeof(GameObject))) as GameObject;
         instance.transform.position = new Vector3(x: 1, y: 2, z: 2);
 
     }
 
     //Will spawn all held objects into the game
-    //tempporarily weird until method ThrowOut is implemented
-    void ReleaseHeldObjects()
-    {
+    void ReleaseHeldObjects() {
 
-        ThrowOut();
+        foreach (string x in listOfInternalItems.Keys) {
 
-        /*
-        for(int i = listOfInternalItems.Count; i >= 0; i--) {
+            int amount = 0;
+            listOfInternalItems.TryGetValue(x, out amount);
 
-            ThrowOut(listOfInternalItems[i]);
-            listOfInternalItems.Remove(listOfInternalItems[i]);
+            for (int i = 0; i < amount; i++) {
+                ThrowOut(x);
+            }
+
+            listOfInternalItems.Remove(x);
 
         }
-        */
     }
 
 }

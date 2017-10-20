@@ -61,10 +61,11 @@ public class ControllerGrabObjectAndTeleport : MonoBehaviour
         get { return SteamVR_Controller.Input((int)trackedObj.index); }
     }
 
+	//private UnityEngine.VR.VRDeviceType device;
+
     void Awake()
     {
         trackedObj = GetComponent<SteamVR_TrackedObject>();
-
     }
 
     void Start()

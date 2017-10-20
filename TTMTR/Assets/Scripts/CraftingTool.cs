@@ -79,7 +79,6 @@ public class CraftingTool : MonoBehaviour {
 			}
 
 		}
-
 	}
 		
 

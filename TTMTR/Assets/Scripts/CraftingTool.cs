@@ -4,58 +4,111 @@ using UnityEngine;
 
 public class CraftingTool : MonoBehaviour {
 
-    List<InventoryItem> listOfInternalItems = new List<InventoryItem>();
-	static Dictionary<InventoryItem, List<InventoryItem>> recipes = new Dictionary<InventoryItem, List<InventoryItem>>();
+	public struct Recipe {
+		public string creation;
+		public Dictionary<string, int> ingredients;
 
-	// Use this for initialization
-	void Start () {
-		Debug.Log("hello I'm a crafting tool!2");
-		List<string> items = new List<string> ();
-		items.Add ("ingredient1");
-		items.Add ("ingredient2");
-		items.Add ("ingredient3");
-		AddRecipe ("ITEMMM", items);
+		public Recipe(string item, Dictionary<string, int> itemIngreds) {
+			creation = item;
+			ingredients = itemIngreds;
+		}
 	}
-	
-	// Update is called once per frame
+
+	public Dictionary<string, int> listOfInternalItems = new Dictionary<string, int>();
+	static List<Recipe> recipes = new List<Recipe>();
+
+	void Start () {
+		// Test Recipes
+		Dictionary<string, int> testRecipe1 = new Dictionary<string, int> ();
+		testRecipe1.Add ("Teleporter", 3);
+		AddRecipe ("Teleporter", testRecipe1);
+
+		Dictionary<string, int> testRecipe2 = new Dictionary<string, int> ();
+		testRecipe2.Add ("Spoon", 2);
+		testRecipe2.Add ("Wand", 1);
+		AddRecipe ("Cauldron", testRecipe2);
+	}
+
 	void Update () {
-        Debug.Log("here's our list of internal items:");
-        Debug.Log(listOfInternalItems[0]);
-        Debug.Log(listOfInternalItems.Count);
+        //will spawn all held objects when the spacebar is clicked
+        if (Input.GetKeyDown("space")) {
+            ReleaseHeldObjects();
+        }
 	}
 
 	void OnTriggerEnter(Collider other) {
-	    Debug.Log("I've triggered something " + other.name);
-
         InventoryItem script = other.gameObject.GetComponent(typeof(InventoryItem)) as InventoryItem;
         GameObject go = other.gameObject;
 
         if (script != null) {
             if (script.craftable == true) {
-
-                listOfInternalItems.Add(script);
-                go.SetActive(false);
-                go.GetComponent<InventoryItem>().useable = false;
-
+				if (listOfInternalItems.ContainsKey (script.name)) {
+					int amount = 0;
+					listOfInternalItems.TryGetValue (script.name, out amount);
+					listOfInternalItems[script.name] = amount + 1;
+				} else {
+					listOfInternalItems.Add(script.name, 1);
+				}
+				Destroy (go);
+				CheckRecipes ();
             }
 
         }
 
 	}
 
-	void AddRecipe(string name, List<string> ingredients) {
-		InventoryItem item = new InventoryItem ();
-		item.name = name;
-		List<InventoryItem> itemIngredients = new List<InventoryItem> ();
+	// Check to see if our ingredients match any recipe
+	void CheckRecipes() {
+		foreach (Recipe r in recipes) {
+			bool haveItems = true;
+			KeyValuePair<string, int> ingredientsToThrowOut = new KeyValuePair<string, int>();
+			foreach (KeyValuePair<string, int> ingredient in r.ingredients) {
+				int amount = 0;
+				listOfInternalItems.TryGetValue (ingredient.Key, out amount);
+				if (amount < ingredient.Value) {
+					haveItems = false;
+				}
+			}
+			if (haveItems) {
+				// Spawn new item
+				ThrowOut (r.creation);
+				// Delete ingredients from listOfInternalItems
+				foreach (KeyValuePair<string, int> ingredient in r.ingredients) {
+					listOfInternalItems [ingredient.Key] = listOfInternalItems [ingredient.Key] - ingredient.Value;
+				}
+			}
 
-		foreach (string i in ingredients) {
-			InventoryItem item2 = new InventoryItem ();
-			item2.name = i;
-			itemIngredients.Add (item2);
 		}
-
-		recipes.Add (item, itemIngredients);
-		Debug.Log ("Recipe added" + recipes.ToString());
 	}
+		
+
+	void AddRecipe(string name, Dictionary<string, int> ingredients) {
+		recipes.Add (new Recipe(name, ingredients));
+	}
+
+    //will spawn the passed object into the map near the crafting table
+    //To do - determine the crafting tables location and spawn near it
+    void ThrowOut(string name) {
+
+        GameObject instance = Instantiate(Resources.Load("Prefabs/Objects/" + name, typeof(GameObject))) as GameObject;
+        instance.transform.position = new Vector3(x: 1, y: 2, z: 2);
+
+    }
+
+    //Will spawn all held objects into the game
+    void ReleaseHeldObjects() {
+		foreach (string x in listOfInternalItems.Keys) {
+			
+            int amount = 0;
+            listOfInternalItems.TryGetValue(x, out amount);
+
+            for (int i = 0; i < amount; i++) {
+                ThrowOut(x);
+            }
+
+        }
+
+		listOfInternalItems.Clear ();
+    }
 
 }

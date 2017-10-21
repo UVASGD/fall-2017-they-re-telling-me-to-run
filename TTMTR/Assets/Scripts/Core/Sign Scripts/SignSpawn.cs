@@ -3,12 +3,14 @@ using UnityEditor;
 
 public class SignSpawn : MonoBehaviour {
 
-    public GameObject prefab;
-    private GameObject spawnedSign;
+    public Sign prefab;
+    private Sign spawnedSign;
+
 	// Use this for initialization
 	void Start () {
         
 	}
+
     public void spawnSign()
     {
         spawnedSign = GameObject.Instantiate(prefab, this.transform);

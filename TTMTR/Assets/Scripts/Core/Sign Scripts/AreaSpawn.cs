@@ -11,6 +11,7 @@ public class AreaSpawn : MonoBehaviour {
         Vector3 center = boundBox.bounds.center;
         Vector3 size = boundBox.bounds.size;
         float diagonal = size.magnitude;
+        int ignoreLayer = ~(1 << 10);
         foreach(GameObject sign in possibleSigns)
         {
             Vector3 newPos = center + new Vector3(
@@ -19,7 +20,7 @@ public class AreaSpawn : MonoBehaviour {
                 (Random.value - 0.5f) * size.z);
             RaycastHit hit;
             Vector3 direction = new Vector3(Random.value-0.5f,-Random.value,Random.value-0.5f);
-            if(Physics.Raycast(newPos, direction, out hit, diagonal))
+            if(Physics.Raycast(newPos, direction, out hit, diagonal,ignoreLayer))
             {
                 Instantiate(sign, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal),gameObject.transform);
             }

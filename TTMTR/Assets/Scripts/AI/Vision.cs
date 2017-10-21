@@ -42,6 +42,6 @@ public class Vision : Sensor {
 			return;
 		}
 
-		detector.Detect(hit.point);
+		detector.Detect(new DetectionObject(hit.point, DetectionObject.DetectionType.Sight, hit.distance));
 	}
 }

@@ -10,10 +10,6 @@ public class Smell : Sensor {
 	void Start () {
 		odors = new Dictionary<int, GameObject>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	}
 
 	private void UpdateTarget() {
 		Vector3 center = Vector3.zero;
@@ -27,7 +23,7 @@ public class Smell : Sensor {
 			GameObject go = enumer.Current;
 			Vector3 pos = go.transform.position;
 			Debug.Log("Single odor found at " + pos);
-			detector.Detect(pos);
+			detector.Detect(new DetectionObject(pos, DetectionObject.DetectionType.Smell, 1));
 			return;
 		}
 		Bounds bounds = new Bounds();
@@ -39,7 +35,7 @@ public class Smell : Sensor {
 			}
 		}
 		Debug.Log("Found center at " + bounds.center);
-		detector.Detect(bounds.center);
+		detector.Detect(new DetectionObject(bounds.center, DetectionObject.DetectionType.Smell, odors.Values.Count));
 	}
 
 	void OnTriggerEnter(Collider coll) {

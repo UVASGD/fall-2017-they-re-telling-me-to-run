@@ -20,7 +20,7 @@ public class CountdownTimer : MonoBehaviour {
 			GetComponent<Text>().text = timekeep.ToString();
 		}
 		if (timekeep == 0) {
-		SceneManager.LoadScene("Assets/Scenes/Test_Scenes/Laura_Scene.unity", LoadSceneMode.Single);
+			SceneManager.LoadScene("Assets/Scenes/Caves/Cave1VR.unity", LoadSceneMode.Single);
 		}
 	}
 }

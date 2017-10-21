@@ -21,6 +21,9 @@ public class DetectionObject : IComparable<DetectionObject> {
 	}
 
 	public int CompareTo(DetectionObject d) {
+		if (d == null) {
+			return -1;
+		}
 		if (type == d.type) {
 			return intensity.CompareTo (d.intensity);
 		}

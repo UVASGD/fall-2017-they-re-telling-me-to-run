@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIController : MonoBehaviour, Detector {
-	
+public class JorogomoController : MonoBehaviour, Detector {
+
 	public UnityEngine.AI.NavMeshAgent navAgent;
 
 	public GameObject player;
@@ -14,6 +14,9 @@ public class AIController : MonoBehaviour, Detector {
 
 	Vector3 curDest;
 
+	public Vision eyes;
+	public Smell nose;
+
 	// Use this for initialization
 	void Start () {
 		curDest = gameObject.transform.position;
@@ -21,8 +24,14 @@ public class AIController : MonoBehaviour, Detector {
 		if (rec != null) {
 			rec.SetDetector(this);
 		}
+		if (eyes != null) {
+			eyes.SetDetector(this);
+		}
+		if (nose != null) {
+			nose.SetDetector(this);
+		}
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (Vector3.Distance(curDest, gameObject.transform.position) < 1.5f) {
@@ -35,5 +44,9 @@ public class AIController : MonoBehaviour, Detector {
 	public void Detect(Vector3 position) {
 		Debug.Log("Something detected at " + position.ToString());
 		curDest = position;
+	}
+
+	void LookAround() {
+
 	}
 }

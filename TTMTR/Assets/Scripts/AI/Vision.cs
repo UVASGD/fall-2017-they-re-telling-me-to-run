@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Vision : MonoBehaviour {
+public class Vision : Sensor {
 
 	public string targetTag;
 
 	public GameObject agent;
-
-	public Detector detector;
 
 	// Use this for initialization
 	void Start () {
@@ -16,16 +14,12 @@ public class Vision : MonoBehaviour {
 			agent = gameObject;
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	void OnTriggerStay(Collider coll) {
 		if (!coll.CompareTag(targetTag)) {
 			return;
 		}
+		Debug.Log("Found player");
 
 		GameObject tar = coll.gameObject;
 		Vector3 agentPos = agent.transform.position;
@@ -44,6 +38,7 @@ public class Vision : MonoBehaviour {
 		}
 
 		if (!hit.collider.gameObject.CompareTag(targetTag)) {
+			Debug.Log(hit.collider.gameObject.tag);
 			return;
 		}
 

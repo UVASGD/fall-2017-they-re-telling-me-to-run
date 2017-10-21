@@ -43,6 +43,5 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
-# Other stuff
-# Visual Studio 2015 cache/options directory
+
 */.vs/

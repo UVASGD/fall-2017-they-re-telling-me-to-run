@@ -25,8 +25,8 @@ public class CraftingTool : MonoBehaviour {
 
 		Dictionary<string, int> testRecipe2 = new Dictionary<string, int> ();
 		testRecipe2.Add ("Spoon", 2);
-		testRecipe2.Add ("Wand", 1);
-		AddRecipe ("Cauldron", testRecipe2);
+		testRecipe2.Add ("Cup", 1);
+		AddRecipe ("Potato", testRecipe2);
 	}
 
 	void Update () {
@@ -36,25 +36,21 @@ public class CraftingTool : MonoBehaviour {
         }
 	}
 
-	void OnTriggerEnter(Collider other) {
+	void OnCollisionEnter(Collision other) {
         InventoryItem script = other.gameObject.GetComponent(typeof(InventoryItem)) as InventoryItem;
         GameObject go = other.gameObject;
 
-        if (script != null) {
-            if (script.craftable == true) {
-				if (listOfInternalItems.ContainsKey (script.name)) {
-					int amount = 0;
-					listOfInternalItems.TryGetValue (script.name, out amount);
-					listOfInternalItems[script.name] = amount + 1;
-				} else {
-					listOfInternalItems.Add(script.name, 1);
-				}
-				Destroy (go);
-				CheckRecipes ();
-            }
-
+		if (script != null && script.craftable) {
+			if (listOfInternalItems.ContainsKey (script.name)) {
+				int amount = 0;
+				listOfInternalItems.TryGetValue (script.name, out amount);
+				listOfInternalItems[script.name] = amount + 1;
+			} else {
+				listOfInternalItems.Add(script.name, 1);
+			}
+			Destroy (go);
+			CheckRecipes ();
         }
-
 	}
 
 	// Check to see if our ingredients match any recipe
@@ -91,7 +87,7 @@ public class CraftingTool : MonoBehaviour {
     void ThrowOut(string name) {
 
         GameObject instance = Instantiate(Resources.Load("Prefabs/Objects/" + name, typeof(GameObject))) as GameObject;
-        instance.transform.position = new Vector3(x: 1, y: 2, z: 2);
+		instance.transform.position = gameObject.transform.position + Vector3.left;
 
     }
 

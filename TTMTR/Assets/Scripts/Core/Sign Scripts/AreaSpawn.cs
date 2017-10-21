@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class AreaSpawn : MonoBehaviour {
 
-    public GameObject[] possibleSigns;
+    public Sign[] possibleSigns;
+
 	// Use this for initialization
 	void Start () {
         BoxCollider boundBox = gameObject.GetComponent<BoxCollider>();
@@ -12,7 +13,7 @@ public class AreaSpawn : MonoBehaviour {
         Vector3 size = boundBox.bounds.size;
         float diagonal = size.magnitude;
         int ignoreLayer = ~(1 << 10);
-        foreach(GameObject sign in possibleSigns)
+        foreach (Sign sign in possibleSigns)
         {
             Vector3 newPos = center + new Vector3(
                 (Random.value - 0.5f) * size.x,

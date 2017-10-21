@@ -26,7 +26,7 @@ public class CraftingTool : MonoBehaviour {
 		Dictionary<string, int> testRecipe2 = new Dictionary<string, int> ();
 		testRecipe2.Add ("Spoon", 2);
 		testRecipe2.Add ("Cup", 1);
-		AddRecipe ("Potato", testRecipe2);
+		AddRecipe ("fi_vil_forge_broadsword4", testRecipe2);
 	}
 
 	void Update () {

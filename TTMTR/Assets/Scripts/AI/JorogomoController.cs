@@ -6,10 +6,6 @@ public class JorogomoController : MonoBehaviour, Detector {
 
 	public UnityEngine.AI.NavMeshAgent navAgent;
 
-	public GameObject player;
-
-	public float playerVisualDistance = 10.0f;
-
 	public List<Transform> wanderPoints;
 
 	Vector3 curDest;

@@ -64,6 +64,7 @@ public class Smell : Sensor {
 		}
 		bool isRemoved = false;
 		isRemoved = odors.Remove(obj.GetInstanceID());
+		Destroy (obj);
 		if (!isRemoved) return;
 		UpdateTarget();
 	}

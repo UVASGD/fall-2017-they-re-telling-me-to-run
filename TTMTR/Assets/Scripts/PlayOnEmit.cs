@@ -21,9 +21,13 @@ public class PlayOnEmit : MonoBehaviour {
 	void Update () {
 		if (particleSys.particleCount > count) 
 		{
-			AudioSource chosen = (AudioSource)audSrcs[Random.Range(0, audSrcs.Count)];
-			if(!chosen.isPlaying) chosen.Play ();
-			count++;
+			int index = Random.Range (-1, audSrcs.Count);
+			if (index > 0) {
+				AudioSource chosen = (AudioSource)audSrcs [index];
+				if (!chosen.isPlaying)
+					chosen.Play ();
+				count++;
+			}
 		} 
 
 		if(!particleSys.isEmitting)

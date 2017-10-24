@@ -14,6 +14,7 @@ public class AIController : MonoBehaviour, Detector {
 
 	Vector3 curDest;
 
+
 	// Use this for initialization
 	void Start () {
 		curDest = gameObject.transform.position;

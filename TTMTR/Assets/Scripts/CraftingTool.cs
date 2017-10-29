@@ -14,13 +14,16 @@ public class CraftingTool : MonoBehaviour {
 		}
 	}
 
-	public Dictionary<string, int> listOfInternalItems = new Dictionary<string, int>();
-	static List<Recipe> recipes = new List<Recipe>();
+	public Dictionary<string, int> listOfInternalItems;
+	static List<Recipe> recipes;
+	string prefabFilePath;
 
 	public GameController gameCont;
 
 	void Start () {
-		// Test Recipes
+		// Test Recipes (TODO: get rid of these two things when DI is finished)
+
+		/*
 		Dictionary<string, int> testRecipe1 = new Dictionary<string, int> ();
 		testRecipe1.Add ("Teleporter", 3);
 		AddRecipe ("Teleporter", testRecipe1);
@@ -29,11 +32,18 @@ public class CraftingTool : MonoBehaviour {
 		testRecipe2.Add ("Spoon", 2);
 		testRecipe2.Add ("Cup", 1);
 		AddRecipe ("fi_vil_forge_broadsword4", testRecipe2);
+*/
+	}
+
+	void Init(Dictionary<string, int> internalItems, List<Recipe> recs, string filePath) {
+		listOfInternalItems = internalItems;
+		recipes = recs;
+		prefabFilePath = filePath;
 	}
 
 	void Update () {
         //will spawn all held objects when the spacebar is clicked
-        if (Input.GetKeyDown("space")) {
+        if (Input.GetKeyDown("space")) { // TODO: change this?
             ReleaseHeldObjects();
         }
 	}
@@ -89,7 +99,7 @@ public class CraftingTool : MonoBehaviour {
     //To do - determine the crafting tables location and spawn near it
     void ThrowOut(string name) {
 
-        GameObject instance = Instantiate(Resources.Load("Prefabs/Objects/" + name, typeof(GameObject))) as GameObject;
+		GameObject instance = Instantiate(Resources.Load(prefabFilePath + name, typeof(GameObject))) as GameObject; // TODO: Maybe hard code in "Prefabs/Objects/"?
 		instance.transform.position = gameObject.transform.position + Vector3.left;
 
     }

@@ -11,8 +11,9 @@ public class SignSpawn : MonoBehaviour {
         
 	}
 
-    public void spawnSign()
+    public void spawnSign(Sign newPrefab)
     {
+        if (prefab == null) prefab = newPrefab; // Delete if you *really* want dependency injection
         spawnedSign = GameObject.Instantiate(prefab, this.transform);
     }
 

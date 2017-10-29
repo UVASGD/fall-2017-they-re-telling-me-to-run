@@ -8,6 +8,19 @@ public class JorogomoController : MonoBehaviour, Detector {
 
 	public List<Transform> wanderPoints;
 
+	bool detectedPlayer = false;
+	bool detectedPlayerRecently = false;
+
+	public float timeToForgetPlayer = 10.0f;
+	public float timeSincePlayerSeen = 10.0f;
+
+	public List<AudioSource> singSources;
+	public List<AudioSource> crawlieSources;
+
+	[SerializeField]
+	private float maxCrawlieTimer = 0.25f;
+	private float curCrawlieTimer;
+
 	Vector3 curDest;
 
 	public Vision eyes;
@@ -30,6 +43,7 @@ public class JorogomoController : MonoBehaviour, Detector {
 		if (nose != null) {
 			nose.SetDetector(this);
 		}
+		curCrawlieTimer = maxCrawlieTimer;
 	}
 
 	// Update is called once per frame
@@ -42,11 +56,33 @@ public class JorogomoController : MonoBehaviour, Detector {
 				curDest = wanderPoints [Random.Range (0, wanderPoints.Count)].position;
 			}
 		}
+		if (detectedPlayerRecently) {
+			timeSincePlayerSeen -= Time.deltaTime;
+			if (timeSincePlayerSeen <= 0.0f) {
+				detectedPlayerRecently = false;
+				timeSincePlayerSeen = 10.0f;
+			}
+		}
+		if (curCrawlieTimer <= 0.0f) {
+			Crawlie();
+			curCrawlieTimer = maxCrawlieTimer;
+		} else {
+			curCrawlieTimer -= Time.deltaTime;
+		}
 		navAgent.destination = curDest;
 	}
 
 	public void Detect(DetectionObject detected) {
 		Debug.Log("Something detected at " + detected.position.ToString());
+		if (!detectedPlayer) {
+			detectedPlayer = true;
+			detectedPlayerRecently = true;
+			Sing();
+		} else if (!detectedPlayerRecently) {
+			detectedPlayerRecently = true;
+			Sing();
+		}
+
 		if (detected.CompareTo (curDetectionObject) <= 0) {
 			curDetectionObject = detected;
 			curDest = detected.position;
@@ -57,5 +93,15 @@ public class JorogomoController : MonoBehaviour, Detector {
 
 	void LookAround() {
 
+	}
+
+	void Sing() {
+		AudioSource chosen = (AudioSource)singSources[Random.Range(0, singSources.Count)];
+		if(chosen != null && !chosen.isPlaying) chosen.Play ();
+	}
+
+	void Crawlie() {
+		AudioSource chosen = (AudioSource)crawlieSources[Random.Range(0, crawlieSources.Count)];
+		if(chosen != null && !chosen.isPlaying) chosen.Play ();
 	}
 }

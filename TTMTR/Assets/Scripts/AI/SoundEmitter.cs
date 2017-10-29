@@ -46,6 +46,7 @@ public class SoundEmitter : MonoBehaviour {
 		Vector3 emitPos = emitter.transform.position;
 
 		foreach (SoundReceiver rec in receivers.Values) {
+			Debug.Log (rec.gameObject.name);
 			srObj = rec.gameObject;
 			srPos = srObj.transform.position;
 

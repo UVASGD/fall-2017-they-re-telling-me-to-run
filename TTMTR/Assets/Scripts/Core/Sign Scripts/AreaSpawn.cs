@@ -31,7 +31,19 @@ public class AreaSpawn : MonoBehaviour {
                     (Random.value - 0.5f) * size.y,
                     (Random.value - 0.5f) * size.z);
                 RaycastHit hit;
-                Vector3 direction = new Vector3(Random.value - 0.5f, -Random.value, Random.value - 0.5f);
+                Vector3 direction = Vector3.zero; // This should be changed
+                switch (signCount.sign.location)
+                {
+                    case Sign.Location.Ceiling:
+                        direction = Vector3.up;
+                        break;
+                    case Sign.Location.Floor:
+                        direction = Vector3.down;
+                        break;
+                    case Sign.Location.Wall:
+                        direction = new Vector3(Random.value - 0.5f, 0, Random.value - 0.5f);
+                        break;
+                }
                 if (Physics.Raycast(newPos, direction, out hit, diagonal, ignoreLayer))
                 {
                     Instantiate(signCount.sign, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal), gameObject.transform);

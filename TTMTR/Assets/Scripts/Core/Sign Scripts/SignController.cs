@@ -10,9 +10,8 @@ public class SignController : MonoBehaviour {
 	void Start () {
         signMarkers = FindObjectsOfType(typeof(SignSpawn)) as SignSpawn[];
         foreach(SignSpawn sign in signMarkers)
-        {
-            if(sign.prefab == null) sign.prefab = possibleSigns[Random.Range(0,possibleSigns.Count)];
-            sign.spawnSign();
+        {   
+            sign.spawnSign(possibleSigns[Random.Range(0, possibleSigns.Count)]);
         }
 	}
 	

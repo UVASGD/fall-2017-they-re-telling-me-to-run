@@ -21,7 +21,7 @@ public class AreaSpawn : MonoBehaviour {
         Vector3 center = boundBox.bounds.center;
         Vector3 size = boundBox.bounds.size;
         float diagonal = size.magnitude;
-        int ignoreLayer = ~(1 << 10);
+        int ignoreLayer = ~LayerMask.GetMask("SpawnAreaBoxes");
         foreach (SignWithCount signCount in possibleSigns)
         {
             for (int i=0; i < signCount.count; i++)

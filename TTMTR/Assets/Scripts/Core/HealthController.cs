@@ -17,15 +17,6 @@ public class HealthController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		float distance = Vector3.Distance(camera.transform.position,monster.transform.position);
-		if (distance < 50 && distance > 5) {
-			Debug.Log ("Monster is very close!");
-		}
-		if (distance < 150 && distance > 30) {
-			Debug.Log ("Monster is getting closer");
-		}
-		if (distance > 150) {
-			Debug.Log ("Monster is far");
-		}
 
 		if (distance < 5) {
 			takeDamage (5000);

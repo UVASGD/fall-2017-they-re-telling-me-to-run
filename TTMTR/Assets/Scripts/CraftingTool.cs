@@ -20,6 +20,8 @@ public class CraftingTool : MonoBehaviour {
 
 	public GameController gameCont;
 
+	public XMLReaderTool xml = new XMLReaderTool();
+
 	void Start () {
 		// Test Recipes (TODO: get rid of these two things when DI is finished)
 

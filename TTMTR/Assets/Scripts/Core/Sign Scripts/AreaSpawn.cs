@@ -15,8 +15,17 @@ public class AreaSpawn : MonoBehaviour {
 
     public SignWithCount[] possibleSigns;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    public float delay;
+    void Start()
+    {
+        StartCoroutine(RealStart());
+    }
+
+    IEnumerator  RealStart() {
+        print(Time.time);
+        yield return new WaitForSeconds(delay);
+        print(Time.time);
         BoxCollider boundBox = gameObject.GetComponent<BoxCollider>();
         Vector3 center = boundBox.bounds.center;
         Vector3 size = boundBox.bounds.size;

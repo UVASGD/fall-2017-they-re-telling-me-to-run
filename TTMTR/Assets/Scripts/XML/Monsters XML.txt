@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+
+<monsters>
+	<name = "1"> Spider </name> 
+	<name = "2"> Witch </name> 
+	<name = "3"> Cloud </name> 
+	<!-- additional monsters here -->
+</monsters>

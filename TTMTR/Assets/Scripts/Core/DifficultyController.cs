@@ -21,6 +21,9 @@ public class DifficultyController : MonoBehaviour {
 
 	public List<HasDifficulty> diffObjects;
 
+	void Init (float maxTimer) {
+		this.maxTimer = maxTimer;
+	}
 	// Use this for initialization
 	void Start () {
 		curTimer = maxTimer;

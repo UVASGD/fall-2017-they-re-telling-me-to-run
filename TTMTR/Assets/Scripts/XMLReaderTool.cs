@@ -4,43 +4,95 @@ using UnityEngine;
 using System.Xml;
 using System.IO;
 
-public class XMLReaderTool : MonoBehaviour {
+public class XMLReaderTool {
 
-	void Start() {
-		ReadRecipeFromXML ();
-
+	static string XML_PATH = "Assets/Scripts/XML/";
+	static string levelType;
+	static string monsterName;
+	
+	public XMLReaderTool (string level) {
+		levelType = level;
+		Initialize ();
 	}
 
+	private static void Initialize() {
+		Debug.Log ("I'm initializing a xml reader tool!");
 
-	public static CraftingTool.Recipe ReadRecipeFromXML() {
+		// read level file and choose random monster from list of levels
+		ReadLevelFile();
+		
+		// read appropriate monster file and add these objects to MonsterData.cs
+		ReadMonsterFile();
 
-		string xmlnode = "<Recipe>" +
-		                 "<Object>fi_vil_forge_broadsword4</Object>" +
-		                 "<Ingredients>" +
-		                 "<Ingedient>" +
-		                 "<Name>Spoon</Name>" +
-		                 "<Quantity>2</Quanitity>" +
-		                 "</Ingredient>" +
-		                 "<Ingredient>" +
-		                 "<Name>Cup</Name>" +
-		                 "<Quantity>1</ Quanitity>" +
-		                 "</Ingredient>" +
-		                 "</Ingredients>" +
-		                 "</Recipe>";
+	}
+	
+	private static void ReadLevelFile() {
+		XmlReader reader = XmlReader.Create(XML_PATH + "levels.xml");
+		// TODO: find a list of monsters, set actual monster
 
-		XmlReader xReader = XmlReader.Create (new StringReader (xmlnode));
+		while (reader.Read ()) {
+			if (reader.NodeType == XmlNodeType.Element && reader.Name == "levelType") {
+				// read level types or something
+			}
+		}
 
-		string recipeGoal = "";
-		Dictionary<string, int> ingredients = new Dictionary<string, int> ();
+		monsterName = "werewolf";
+	}
+	
+	private static void ReadMonsterFile() {
+		XmlReader reader = XmlReader.Create (XML_PATH + monsterName + ".xml");
 
-		while (xReader.Read ()) {
-			if (xReader.NodeType == XmlNodeType.Element) {
-				if (xReader.Name == "Object") {
-					Debug.Log ("an object! " + xReader.Value);
-				} else if (xReader.Name == "Ingredient") {
-					Debug.Log ("an ingredient! " + xReader.Value);
+		while (reader.Read ()) {
+			if (reader.NodeType == XmlNodeType.Element) {
+				if (reader.Name == "Recipes") {
+					ReadSigns (reader.ReadSubtree);
+				} else if (reader.Name == "Signs") {
+					ReadRecipes (reader.ReadSubtree);
 				}
 			}
 		}
+	}
+
+	private static void ReadSigns(XmlReader reader) {
+		// TODO: process signs xml
+		reader.Close ();
+
+	}
+
+	private static void ReadRecipes(XmlReader reader) {
+		while (reader.Read ()) {
+			if (reader.NodeType == XmlNodeType.Element && reader.Name == "Recipe") {
+				CraftingTool.Recipe recipe = ReadRecipeFromXML (reader.ReadSubtree);
+				MonsterData.recipes.Add (recipe);
+			}
+		}
+		reader.Close ();
+	}
+
+	// example of extracting info from a string of xml
+	private static CraftingTool.Recipe ReadRecipeFromXML(XmlReader reader) {
+		string recipeGoal = "";
+		Dictionary<string, int> ingredients = new Dictionary<string, int> ();
+
+		while (reader.Read ()) { // Read next element
+			if (reader.NodeType == XmlNodeType.Element) {
+				if (reader.Name == "Object") {
+					reader.Read (); // extract inner text from element
+					recipeGoal = reader.Value;
+				} else if (reader.Name == "Ingredient") {
+					reader.Read ();
+					int val;
+					ingredients.TryGetValue (reader.Value, out val);
+					if (val == 0) {
+						ingredients.Add (reader.Value, 1);
+					} else {
+						ingredients [reader.Value] = val + 1;
+					}
+				}
+			}
+		}
+		reader.Close ();
+
+		return new CraftingTool.Recipe(recipeGoal, ingredients);
 	}
 }

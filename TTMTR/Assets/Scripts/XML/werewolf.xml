@@ -1,0 +1,32 @@
+<Signs>
+	<Sign>Sign1</Sign>
+	<Sign>Sign2</Sign>
+</Signs>
+<Recipes>
+	<Recipe>
+		<Object>fi_vil_forge_broadsword4</Object>
+		<Ingredients>
+			<Ingredient>
+				<Name>Spoon</Name>
+				<Quantity>2</Quantity>
+			</Ingredient>
+			<Ingredient>
+				<Name>Cup</Name>
+				<Quantity>1</Quantity>
+			</Ingredient>
+		</Ingredients>
+	</Recipe>
+	<Recipe>
+		<Object>fi_vil_forge_broadsword3</Object>
+		<Ingredients>
+			<Ingredient>
+				<Name>Spoon</Name>
+				<Quantity>2</Quantity>
+			</Ingredient>
+			<Ingredient>
+				<Name>Cup</Name>
+				<Quantity>1</Quantity>
+			</Ingredient>
+		</Ingredients>
+	</Recipe>
+</Recipes>

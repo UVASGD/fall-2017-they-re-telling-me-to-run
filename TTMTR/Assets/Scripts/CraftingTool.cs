@@ -101,8 +101,12 @@ public class CraftingTool : MonoBehaviour {
     //To do - determine the crafting tables location and spawn near it
     void ThrowOut(string name) {
 
-		GameObject instance = Instantiate(Resources.Load(prefabFilePath + name, typeof(GameObject))) as GameObject; // TODO: Maybe hard code in "Prefabs/Objects/"?
-		instance.transform.position = gameObject.transform.position + Vector3.left;
+		GameObject instance = Instantiate(Resources.Load(prefabFilePath + name, typeof(GameObject))) as GameObject;
+		Vector3 pos = transform.position;
+		pos.x += 1 + i;
+		pos.y += 1;
+		pos.z += 2;
+		instance.transform.position = pos;
 
     }
 

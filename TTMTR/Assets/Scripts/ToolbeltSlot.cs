@@ -8,6 +8,9 @@ public class ToolbeltSlot : MonoBehaviour {
     private InventoryItem touchingItem;
     private InventoryItem heldItem;
 
+    public ControllerGrabObjectAndTeleport leftController;
+    public ControllerGrabObjectAndTeleport rightController;
+
     private SteamVR_Controller.Device Controller
     {
         get { return SteamVR_Controller.Input((int)trackedObj.index); }
@@ -25,18 +28,37 @@ public class ToolbeltSlot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Controller.GetPressUp(SteamVR_Controller.ButtonMask.Trigger)
-            && touchingItem && !heldItem)
+        if (Controller.GetPressUp(SteamVR_Controller.ButtonMask.Trigger))
         {
-            heldItem = touchingItem;
-            touchingItem = null;
+            if (touchingItem && !heldItem)
+            {
+                heldItem = touchingItem;
+                touchingItem = null;
+                AddJoint(heldItem);
+            }
         }
-	}
+        else if (Controller.GetPress(SteamVR_Controller.ButtonMask.Trigger))
+        {
+            if (heldItem && (heldItem == leftController.ObjectInHand ||
+                             heldItem == rightController.ObjectInHand))
+            {
+                heldItem = null;
+                var joint = GetComponent<FixedJoint>();
+                if (joint)
+                {
+                    joint.connectedBody = null;
+                    Destroy(joint);
+                }
+            }
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (touchingItem || heldItem) return;
         InventoryItem item = other.GetComponent<InventoryItem>();
-        if (item)
+        if (item && (leftController.ObjectInHand == item ||
+                     rightController.ObjectInHand == item))
         {
             item.GetComponent<Highlightable>().Highlight();
             GetComponent<Highlightable>().Highlight();
@@ -47,11 +69,19 @@ public class ToolbeltSlot : MonoBehaviour {
     private void OnTriggerExit(Collider other)
     {
         InventoryItem item = other.GetComponent<InventoryItem>();
-        if (item)
+        if (item && item == touchingItem)
         {
             item.GetComponent<Highlightable>().LowLight();
             GetComponent<Highlightable>().LowLight();
             touchingItem = null;
         }
+    }
+
+    private void AddJoint(InventoryItem item)
+    {
+        FixedJoint fx = gameObject.AddComponent<FixedJoint>();
+        fx.breakForce = 20000;
+        fx.breakTorque = 20000;
+        fx.connectedBody = item.GetComponent<Rigidbody>();
     }
 }

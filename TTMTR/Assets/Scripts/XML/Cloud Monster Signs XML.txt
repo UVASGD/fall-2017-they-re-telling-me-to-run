@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+
+<monster name = "Cloud">
+	<sign number = "1"> scratch_marks </sign>
+	<sign number = "2"> pool_of_blood </sign>
+	<!-- additional signs here --> 
+</monster>

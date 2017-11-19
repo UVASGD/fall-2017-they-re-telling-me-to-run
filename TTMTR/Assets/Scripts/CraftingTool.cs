@@ -14,26 +14,37 @@ public class CraftingTool : MonoBehaviour {
 		}
 	}
 
-	public Dictionary<string, int> listOfInternalItems = new Dictionary<string, int>();
-	static List<Recipe> recipes = new List<Recipe>();
+	public Dictionary<string, int> listOfInternalItems;
+	static List<Recipe> recipes;
+	string prefabFilePath;
 
 	public GameController gameCont;
 
 	void Start () {
-		// Test Recipes
+		// Test Recipes (TODO: get rid of these two things when DI is finished)
+		Debug.Log("I'm initializing a crafting tool1");
+		//XMLReaderTool myReader = new XMLReaderTool("cave");
+		Debug.Log("I'm initializing a crafting tool1");
 		Dictionary<string, int> testRecipe1 = new Dictionary<string, int> ();
 		testRecipe1.Add ("Teleporter", 3);
 		AddRecipe ("Teleporter", testRecipe1);
-
+		/*
 		Dictionary<string, int> testRecipe2 = new Dictionary<string, int> ();
 		testRecipe2.Add ("Spoon", 2);
 		testRecipe2.Add ("Cup", 1);
 		AddRecipe ("fi_vil_forge_broadsword4", testRecipe2);
+		*/
+	}
+
+	void Init(Dictionary<string, int> internalItems, List<Recipe> recs, string filePath) {
+		listOfInternalItems = internalItems;
+		recipes = recs;
+		prefabFilePath = filePath;
 	}
 
 	void Update () {
         //will spawn all held objects when the spacebar is clicked
-        if (Input.GetKeyDown("space")) {
+        if (Input.GetKeyDown("space")) { // TODO: change this?
             ReleaseHeldObjects();
         }
 	}
@@ -69,7 +80,7 @@ public class CraftingTool : MonoBehaviour {
 			}
 			if (haveItems) {
 				// Spawn new item
-				ThrowOut (r.creation);
+				ThrowOut (r.creation, 0);
 				// Delete ingredients from listOfInternalItems
 				foreach (KeyValuePair<string, int> ingredient in r.ingredients) {
 					listOfInternalItems [ingredient.Key] = listOfInternalItems [ingredient.Key] - ingredient.Value;
@@ -87,10 +98,14 @@ public class CraftingTool : MonoBehaviour {
 
     //will spawn the passed object into the map near the crafting table
     //To do - determine the crafting tables location and spawn near it
-    void ThrowOut(string name) {
+    void ThrowOut(string name, int i) {
 
-        GameObject instance = Instantiate(Resources.Load("Prefabs/Objects/" + name, typeof(GameObject))) as GameObject;
-		instance.transform.position = gameObject.transform.position + Vector3.left;
+		GameObject instance = Instantiate(Resources.Load(prefabFilePath + name, typeof(GameObject))) as GameObject;
+		Vector3 pos = transform.position;
+		pos.x += 1 + i;
+		pos.y += 1;
+		pos.z += 2;
+		instance.transform.position = pos;
 
     }
 
@@ -102,7 +117,7 @@ public class CraftingTool : MonoBehaviour {
             listOfInternalItems.TryGetValue(x, out amount);
 
             for (int i = 0; i < amount; i++) {
-                ThrowOut(x);
+                ThrowOut(x, i);
             }
 
         }

@@ -9,4 +9,8 @@ public class SoundReceiver : Sensor {
 	public virtual void Receive(float intensity, Vector3 position) {
 		detector.Detect(new DetectionObject(position, DetectionObject.DetectionType.Hearing, intensity));
 	}
+
+	public void SetThreshold(float thresh) {
+		soundThreshold = thresh;
+	}
 }

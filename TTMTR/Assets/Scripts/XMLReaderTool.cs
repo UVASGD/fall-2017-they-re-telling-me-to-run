@@ -54,8 +54,13 @@ public class XMLReaderTool {
 	}
 
 	private static void ReadSigns(XmlReader reader) {
-		// TODO: process signs xml
-		reader.Close ();
+        while (reader.Read()) {
+            if (reader.NodeType == XmlNodeType.Element && reader.Name == "Signs") {
+                //To Do: Consult with the team that developed signs on what data needs to be imported, how to instantiate signs
+            }
+        }
+
+        reader.Close ();
 
 	}
 

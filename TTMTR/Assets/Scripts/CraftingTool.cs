@@ -17,6 +17,8 @@ public class CraftingTool : MonoBehaviour {
 	public Dictionary<string, int> listOfInternalItems = new Dictionary<string, int>();
 	static List<Recipe> recipes = new List<Recipe>();
 
+	public GameController gameCont;
+
 	void Start () {
 		// Test Recipes
 		Dictionary<string, int> testRecipe1 = new Dictionary<string, int> ();
@@ -72,6 +74,7 @@ public class CraftingTool : MonoBehaviour {
 				foreach (KeyValuePair<string, int> ingredient in r.ingredients) {
 					listOfInternalItems [ingredient.Key] = listOfInternalItems [ingredient.Key] - ingredient.Value;
 				}
+				gameCont.IncreaseDifficulty ();
 			}
 
 		}

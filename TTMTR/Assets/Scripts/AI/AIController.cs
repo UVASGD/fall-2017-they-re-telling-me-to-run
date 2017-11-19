@@ -14,6 +14,7 @@ public class AIController : MonoBehaviour, Detector {
 
 	Vector3 curDest;
 
+
 	// Use this for initialization
 	void Start () {
 		curDest = gameObject.transform.position;
@@ -32,8 +33,8 @@ public class AIController : MonoBehaviour, Detector {
 		navAgent.destination = curDest;
 	}
 
-	public void Detect(Vector3 position) {
-		Debug.Log("Something detected at " + position.ToString());
-		curDest = position;
+	public void Detect(DetectionObject detection) {
+		Debug.Log("Something detected at " + detection.position.ToString());
+		curDest = detection.position;
 	}
 }

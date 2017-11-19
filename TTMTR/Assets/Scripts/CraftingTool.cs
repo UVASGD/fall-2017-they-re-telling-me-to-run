@@ -20,7 +20,7 @@ public class CraftingTool : MonoBehaviour {
 	void Start () {
 		// Test Recipes
 		Dictionary<string, int> testRecipe1 = new Dictionary<string, int> ();
-		testRecipe1.Add ("Teleporter", 3);
+		testRecipe1.Add ("Teleporter", 4);
 		AddRecipe ("Teleporter", testRecipe1);
 
 		Dictionary<string, int> testRecipe2 = new Dictionary<string, int> ();
@@ -71,7 +71,7 @@ public class CraftingTool : MonoBehaviour {
 			}
 			if (haveItems) {
 				// Spawn new item
-				ThrowOut (r.creation);
+				ThrowOut (r.creation, 0);
 				// Delete ingredients from listOfInternalItems
 				foreach (KeyValuePair<string, int> ingredient in r.ingredients) {
 					listOfInternalItems [ingredient.Key] = listOfInternalItems [ingredient.Key] - ingredient.Value;
@@ -88,10 +88,14 @@ public class CraftingTool : MonoBehaviour {
 
     //will spawn the passed object into the map near the crafting table
     //To do - determine the crafting tables location and spawn near it
-    void ThrowOut(string name) {
+	void ThrowOut(string name, int i) {
 
         GameObject instance = Instantiate(Resources.Load("Prefabs/Objects/" + name, typeof(GameObject))) as GameObject;
-        instance.transform.position = new Vector3(x: 1, y: 2, z: 2);
+		Vector3 pos = transform.position;
+		pos.x += 1 + i;
+		pos.y += 2;
+		pos.z += 2;
+		instance.transform.position = pos;
 
     }
 
@@ -103,7 +107,7 @@ public class CraftingTool : MonoBehaviour {
             listOfInternalItems.TryGetValue(x, out amount);
 
             for (int i = 0; i < amount; i++) {
-                ThrowOut(x);
+                ThrowOut(x, i);
             }
 
         }

@@ -1,32 +1,55 @@
-<Signs>
-	<Sign>Sign1</Sign>
-	<Sign>Sign2</Sign>
-</Signs>
-<Recipes>
-	<Recipe>
-		<Object>fi_vil_forge_broadsword4</Object>
-		<Ingredients>
-			<Ingredient>
-				<Name>Spoon</Name>
-				<Quantity>2</Quantity>
-			</Ingredient>
-			<Ingredient>
-				<Name>Cup</Name>
-				<Quantity>1</Quantity>
-			</Ingredient>
-		</Ingredients>
-	</Recipe>
-	<Recipe>
-		<Object>fi_vil_forge_broadsword3</Object>
-		<Ingredients>
-			<Ingredient>
-				<Name>Spoon</Name>
-				<Quantity>2</Quantity>
-			</Ingredient>
-			<Ingredient>
-				<Name>Cup</Name>
-				<Quantity>1</Quantity>
-			</Ingredient>
-		</Ingredients>
-	</Recipe>
-</Recipes>
+<root>
+  
+  <Signs>
+    <AreaSpawns>
+      <sign>
+        <prefab>Sphere</prefab>
+        <count>30</count>
+      </sign>
+      <sign>
+        <prefab>Nest</prefab>
+        <sign>50</sign>
+      </sign>
+      <!-- add additional AreaSigns here, must have a prefab and count attribute-->
+    </AreaSpawns>
+    <SpotSigns>
+      <sign>
+        <prebab>Cube</prebab>
+      </sign>
+      <sign>
+        <prefab>Sphere</prefab>
+      </sign>
+      <!-- add additional SpotSigns here, must have a prefab attribute only-->
+    </SpotSigns>
+  </Signs>
+  
+  <Recipes>
+    <Recipe>
+      <Object>fi_vil_forge_broadsword4</Object>
+      <Ingredients>
+        <Ingredient>
+          <Name>Spoon</Name>
+          <Quantity>2</Quantity>
+        </Ingredient>
+        <Ingredient>
+          <Name>Cup</Name>
+          <Quantity>1</Quantity>
+        </Ingredient>
+      </Ingredients>
+    </Recipe>
+    <Recipe>
+      <Object>fi_vil_forge_broadsword3</Object>
+      <Ingredients>
+        <Ingredient>
+          <Name>Spoon</Name>
+          <Quantity>2</Quantity>
+        </Ingredient>
+        <Ingredient>
+          <Name>Cup</Name>
+          <Quantity>1</Quantity>
+        </Ingredient>
+      </Ingredients>
+    </Recipe>
+  </Recipes>
+  
+</root>

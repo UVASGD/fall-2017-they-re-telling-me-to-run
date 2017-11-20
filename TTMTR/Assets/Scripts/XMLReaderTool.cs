@@ -79,9 +79,9 @@ public class XMLReaderTool {
 			if (reader.NodeType == XmlNodeType.Element) {
 				if (reader.Name == "Signs") {
 					if (reader.Name == "AreaSpawns") {
-                        ReadAreaSigns(reader.ReadSubtree);
+                        ReadAreaSigns(reader.ReadSubtree());
                     } else if (reader.Name == "SpotSigns") {
-                        ReadSpotSigns(reader.ReadSubtree);
+                        ReadSpotSigns(reader.ReadSubtree());
                     }
 				} else if (reader.Name == "Recipes") {
 					ReadRecipes (reader.ReadSubtree ());
@@ -98,7 +98,8 @@ public class XMLReaderTool {
      * This method will be called from ReadMonsterFile() and will read in an <AreaSigns> section of the xml file, 
      * which is composed of <signs>s holding <prefab>s and <count>s
      */
-    private static void ReadAreaSigns(XmlReader reader) {
+
+    private static void ReadAreaSigns (System.Xml.XmlReader reader) {
         int count = -10;    //integers can't be set to null, so -10 is an impossible value that's a stand in for null
         string prefab = null;
 
@@ -129,7 +130,7 @@ public class XMLReaderTool {
      * This method will be called from ReadMonsterFile() and will read in an <SpotSigns> section of the xml file, 
      * which is composed of <signs>s holding only <prefab>s
      */
-    private static void ReadSpotSigns(XmlReader reader) {
+    private static void ReadSpotSigns(System.Xml.XmlReader reader) {
         while (reader.Read()) {
             if (reader.NodeType == XmlNodeType.Element && reader.Name == "prefab") {
                 spotSignsPrefabs.Add(reader.Value);
@@ -194,4 +195,3 @@ public class XMLReaderTool {
 		return new CraftingTool.Recipe(recipeGoal, ingredients);
 	}
 }
-*/

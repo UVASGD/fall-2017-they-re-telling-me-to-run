@@ -1,8 +1,9 @@
-﻿/*using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
 using System.IO;
+using System.Collections.Generic;
 
 public class XMLReaderTool {
 
@@ -13,11 +14,10 @@ public class XMLReaderTool {
     static Dictionary<int, string> areaSigns;
 	
 	public XMLReaderTool (string level) {
-		levelType = level;
 		Initialize ();
 	}
 
-	private static void Initialize() {
+	public static void Initialize() {
 		Debug.Log ("I'm initializing a xml reader tool!");
 
 		// read level file and choose random monster from list of levels
@@ -32,13 +32,44 @@ public class XMLReaderTool {
 		XmlReader reader = XmlReader.Create(XML_PATH + "levels.xml");
 		// TODO: find a list of monsters, set actual monster
 
+		List<string> levelTypes = new List<string> ();
+
 		while (reader.Read ()) {
 			if (reader.NodeType == XmlNodeType.Element && reader.Name == "levelType") {
-				// read level types or something
+				levelTypes.Add (reader.GetAttribute("name"));
 			}
 		}
 
-		monsterName = "werewolf";
+		System.Random rnd = new System.Random ();
+
+		int levelSelection = rnd.Next (0, levelTypes.Count);
+		levelType = levelTypes [levelSelection];
+
+		XmlReader readerMonster = XmlReader.Create(XML_PATH + "levels.xml");
+
+		while (readerMonster.Read ()) {
+			if (readerMonster.NodeType == XmlNodeType.Element && readerMonster.GetAttribute("name") == levelType) {
+				SelectMonster (readerMonster.ReadSubtree ());
+				break;
+			}
+		}
+
+	}
+
+	private static void SelectMonster(XmlReader reader) {
+
+		List<string> monsters = new List<string> ();
+
+		System.Random rnd = new System.Random ();
+
+		while (reader.Read ()) {
+			if (reader.NodeType == XmlNodeType.Element && reader.Name == "monster") {
+				monsters.Add (reader.GetAttribute("name"));
+			}
+		}
+
+		int monsterSelection = rnd.Next (0, monsters.Count);
+		monsterName = monsters [monsterSelection];
 	}
 	
 	private static void ReadMonsterFile() {
@@ -46,14 +77,18 @@ public class XMLReaderTool {
 
 		while (reader.Read ()) {
 			if (reader.NodeType == XmlNodeType.Element) {
-				if (reader.Name == "Recipes") {
+				if (reader.Name == "Signs") {
 					if (reader.Name == "AreaSpawns") {
                         ReadAreaSigns(reader.ReadSubtree);
                     } else if (reader.Name == "SpotSigns") {
                         ReadSpotSigns(reader.ReadSubtree);
                     }
-				} else if (reader.Name == "Signs") {
-					ReadRecipes (reader.ReadSubtree);
+				} else if (reader.Name == "Recipes") {
+					ReadRecipes (reader.ReadSubtree ());
+				} else if (reader.Name == "WinConditions") {
+					ReadWinConditions (reader.ReadSubtree ());
+				} else if (reader.Name == "Paths") {
+					ReadPaths (reader.ReadSubtree ());
 				}
 			}
 		}
@@ -113,11 +148,23 @@ public class XMLReaderTool {
     private static void ReadRecipes(XmlReader reader) {
 		while (reader.Read ()) {
 			if (reader.NodeType == XmlNodeType.Element && reader.Name == "Recipe") {
-				CraftingTool.Recipe recipe = ReadRecipeFromXML (reader.ReadSubtree);
+				CraftingTool.Recipe recipe = ReadRecipeFromXML (reader.ReadSubtree());
 				MonsterData.recipes.Add (recipe);
 			}
 		}
 		reader.Close ();
+	}
+
+	private static void ReadWinConditions(XmlReader reader) {
+		while (reader.Read ()) {
+
+		}
+	}
+
+	private static void ReadPaths (XmlReader reader) {
+		while (reader.Read ()) {
+
+		}
 	}
 
 	// example of extracting info from a string of xml

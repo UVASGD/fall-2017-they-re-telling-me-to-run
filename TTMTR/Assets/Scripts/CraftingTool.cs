@@ -23,7 +23,7 @@ public class CraftingTool : MonoBehaviour {
 	void Start () {
 		// Test Recipes (TODO: get rid of these two things when DI is finished)
 		Debug.Log("I'm initializing a crafting tool1");
-		//XMLReaderTool myReader = new XMLReaderTool("cave");
+		XMLReaderTool myReader = new XMLReaderTool();
 		Debug.Log("I'm initializing a crafting tool1");
 		Dictionary<string, int> testRecipe1 = new Dictionary<string, int> ();
 		testRecipe1.Add ("Teleporter", 3);

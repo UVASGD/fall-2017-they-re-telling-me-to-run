@@ -57,10 +57,18 @@ public class AreaSpawn : MonoBehaviour {
                 {
                     if (signCount.sign.location == Sign.Location.Wall)
                     {
-                        Vector3 perp = Vector3.Cross(direction, Vector3.up).normalized*coneRadius; 
+                        Vector3 perp = Vector3.Cross(direction, Vector3.up).normalized*coneRadius;
+                        Vector3 longways = direction.normalized * coneRadius;
                         RaycastHit[] starHits = new RaycastHit[8];
-                        Physics.Raycast(newPos, direction, out starHits[0], diagonal, ignoreLayer);
-                        // Start at up, continue clockwise (0-U, 1-UR, 2-R, 3-DR, 4-D, 5-DL, 6-L, 7-UL)
+                        // Numbers go clockwise from up (0)
+                        Vector3[] starVecs = { Vector3.up * coneRadius, Vector3.zero, perp, Vector3.zero,
+                            Vector3.down * coneRadius, Vector3.zero,  -perp, Vector3.zero};
+                        for(int j = 0; j < 8; j++)
+                        {
+                            Physics.Raycast(newPos, longways + starVecs[j], out starHits[j], diagonal * 2, ignoreLayer);
+                        }
+
+
                         // Ryan is a genius, just add the vectors
 
                     }

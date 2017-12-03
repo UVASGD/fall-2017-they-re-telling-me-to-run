@@ -37,7 +37,7 @@ public class ToolbeltSlot : MonoBehaviour {
 		{
 			return;
 		}
-		if (cont.Controller.GetPressUp(SteamVR_Controller.ButtonMask.Trigger))
+		if (cont.Controller.GetHairTriggerUp())
 		{
 			if (touchingItem && !heldItem)
 			{
@@ -46,11 +46,10 @@ public class ToolbeltSlot : MonoBehaviour {
 				AddJoint(heldItem);
 			}
 		}
-		else if (cont.Controller.GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
+		else if (cont.Controller.GetHairTriggerDown())
 		{
-			if (heldItem && 
-				(heldItem.gameObject == leftController.objectInHand || heldItem.gameObject == leftController.collidingObject ||
-				 heldItem.gameObject == rightController.objectInHand || heldItem.gameObject == rightController.collidingObject))
+			if (heldItem && (heldItem.gameObject == cont.objectInHand || 
+				             heldItem.gameObject == cont.collidingObject)
 			{
 				heldItem = null;
 				var joint = GetComponent<FixedJoint>();

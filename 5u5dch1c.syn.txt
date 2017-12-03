@@ -1,0 +1,42 @@
+﻿cave map + boulders for testing!
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# Explicit paths specified without -i or -o; assuming --only paths...
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   TTMTR/Assets/Externals/CaveGen/GraniteMica/NTT_GraniteMica.mat
+#	modified:   TTMTR/Assets/Externals/CaveGen/RockyMountainGranite_03/NTT_RockyMountainGranite_03.mat
+#	modified:   TTMTR/Assets/Externals/Rocks and Boulders 2/Editor/CrossPlatformInput/CrossPlatformInputInitialize.cs
+#	modified:   TTMTR/Assets/Externals/Rocks and Boulders 2/Rocks/Source/Materials/Unity 5/Rock1.mat
+#	modified:   TTMTR/Assets/Externals/Rocks and Boulders 2/Rocks/Source/Materials/Unity 5/Rock2.mat
+#	modified:   TTMTR/Assets/Externals/Rocks and Boulders 2/Standard Assets/Characters/FirstPersonCharacter/Prefabs/FPSController.prefab
+#	modified:   TTMTR/Assets/Externals/Rocks and Boulders 2/Standard Assets/Characters/FirstPersonCharacter/Prefabs/RigidBodyFPSController.prefab
+#	modified:   TTMTR/Assets/Externals/Rocks and Boulders 2/Standard Assets/Characters/FirstPersonCharacter/Scripts/FirstPersonController.cs
+#	modified:   TTMTR/Assets/Externals/Rocks and Boulders 2/Standard Assets/Characters/FirstPersonCharacter/Scripts/RigidbodyFirstPersonController.cs
+#	modified:   TTMTR/Assets/Externals/Rocks and Boulders 2/Standard Assets/CrossPlatformInput/Scripts/MobileControlRig.cs
+#	modified:   TTMTR/Assets/Externals/Rocks and Boulders 2/Standard Assets/Utility/AutoMobileShaderSwitch.cs
+#	modified:   TTMTR/Assets/Externals/Rocks and Boulders 2/Standard Assets/Utility/ForcedReset.cs
+#	modified:   TTMTR/Assets/Externals/Rocks and Boulders 2/Standard Assets/Utility/ParticleSystemDestroyer.cs
+#	modified:   TTMTR/Assets/Externals/Rocks and Boulders 2/Standard Assets/Utility/PlatformSpecificContent.cs
+#	modified:   TTMTR/Assets/Externals/Rocks and Boulders 2/Standard Assets/Utility/TimedObjectActivator.cs
+#	modified:   TTMTR/ProjectSettings/ProjectSettings.asset
+#	modified:   TTMTR/debug.log
+#
+# Untracked files:
+#	TTMTR/Assets/Externals/Rocks and Boulders 2/Standard Assets/Characters/RollerBall.meta
+#	TTMTR/Assets/Externals/Rocks and Boulders 2/Standard Assets/Characters/RollerBall/
+#	TTMTR/Assets/Externals/Rocks and Boulders 2/Standard Assets/Characters/ThirdPersonCharacter.meta
+#	TTMTR/Assets/Externals/Rocks and Boulders 2/Standard Assets/Characters/ThirdPersonCharacter/
+#	TTMTR/Assets/Resources/Prefabs/Objects/Rocks.meta
+#	TTMTR/Assets/Resources/Prefabs/Objects/Rocks/
+#	TTMTR/Assets/Scenes/Test_Scenes/jfkejflke.meta
+#	TTMTR/Assets/Scenes/Test_Scenes/jfkejflke/
+#	TTMTR/Assets/Standard Assets/CrossPlatformInput/
+#	TTMTR/Assets/Standard Assets/PhysicsMaterials.meta
+#	TTMTR/Assets/Standard Assets/PhysicsMaterials/
+#	TTMTR/Assets/Standard Assets/Utility.meta
+#	TTMTR/Assets/Standard Assets/Utility/
+#
+

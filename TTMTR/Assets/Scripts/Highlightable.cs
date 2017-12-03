@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshRenderer))]
-public class HighlightTest : MonoBehaviour {
+public class Highlightable : MonoBehaviour {
 
 	[SerializeField]
 	private bool lightOn;

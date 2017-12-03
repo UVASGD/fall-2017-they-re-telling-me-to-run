@@ -59,6 +59,11 @@ public class ControllerGrabObjectAndTeleport : MonoBehaviour
     private bool shouldTeleport; // True if there's a valid teleport target
     //------------------------------------------
 
+    public GameObject ObjectInHand
+    {
+        get { return objectInHand; }
+    }
+
     private SteamVR_Controller.Device Controller
     {
         get { return SteamVR_Controller.Input((int)trackedObj.index); }

@@ -6,7 +6,7 @@ public class Sign : MonoBehaviour {
 
     public enum Location
     {
-        Wall, Floor, Ceiling
+        Floor, Wall, Ceiling
     }
 
     public Location location;

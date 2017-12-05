@@ -150,6 +150,7 @@ public class XMLReaderTool {
 		while (reader.Read ()) {
 			if (reader.NodeType == XmlNodeType.Element && reader.Name == "Recipe") {
 				CraftingTool.Recipe recipe = ReadRecipeFromXML (reader.ReadSubtree());
+				Debug.Log ("CREATION: " + recipe.creation);
 				MonsterData.recipes.Add (recipe);
 			}
 		}
@@ -178,16 +179,23 @@ public class XMLReaderTool {
 				if (reader.Name == "Object") {
 					reader.Read (); // extract inner text from element
 					recipeGoal = reader.Value;
-				} else if (reader.Name == "Ingredient") {
+				} else if (reader.Name == "Name") {
 					reader.Read ();
+					string objName;
+					int amount;
 					int val;
-					ingredients.TryGetValue (reader.Value, out val);
+					objName = reader.Value;
+					Debug.Log ("objName: " + objName);
+					reader.ReadToFollowing ("Quantity");
+					reader.Read ();
+					int.TryParse (reader.Value, out amount);
+					Debug.Log ("amount: " + amount);
+					ingredients.TryGetValue (objName, out val);
 					if (val == 0) {
-						ingredients.Add (reader.Value, 1);
-					} else {
-						ingredients [reader.Value] = val + 1;
+						Debug.Log ("adding ingredient: " + objName);
+						ingredients.Add (objName, amount);
 					}
-				}
+				} 
 			}
 		}
 		reader.Close ();

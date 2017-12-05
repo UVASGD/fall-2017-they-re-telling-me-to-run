@@ -13,7 +13,7 @@
 		</AreaSpawns>
 		<SpotSigns>
 		  <sign>
-			<prebab>Cube</prebab>
+			<prefab>Cube</prefab>
 		  </sign>
 		  <sign>
 			<prefab>Sphere</prefab>
@@ -30,20 +30,7 @@
 	</WinConditions>
 	<Recipes>
 		<Recipe>
-			<Object>fi_vil_forge_broadsword4</Object>
-			<Ingredients>
-				<Ingredient>
-					<Name>Spoon</Name>
-					<Quantity>2</Quantity>
-				</Ingredient>
-				<Ingredient>
-					<Name>Cup</Name>
-					<Quantity>1</Quantity>
-				</Ingredient>
-			</Ingredients>
-		</Recipe>
-		<Recipe>
-			<Object>fi_vil_forge_broadsword3</Object>
+			<Object>Teleporter</Object>
 			<Ingredients>
 				<Ingredient>
 					<Name>Spoon</Name>

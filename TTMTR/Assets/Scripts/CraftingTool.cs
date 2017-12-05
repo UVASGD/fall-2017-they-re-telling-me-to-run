@@ -23,17 +23,17 @@ public class CraftingTool : MonoBehaviour {
 	void Start () {
 		// Test Recipes (TODO: get rid of these two things when DI is finished)
 		Debug.Log("I'm initializing a crafting tool1");
-		XMLReaderTool myReader = new XMLReaderTool();
+		XMLReaderTool myReader = new XMLReaderTool("Cave");
 		Debug.Log("I'm initializing a crafting tool1");
+		/*
 		Dictionary<string, int> testRecipe1 = new Dictionary<string, int> ();
 		testRecipe1.Add ("Teleporter", 3);
 		AddRecipe ("Teleporter", testRecipe1);
-		/*
+		*/
 		Dictionary<string, int> testRecipe2 = new Dictionary<string, int> ();
 		testRecipe2.Add ("Spoon", 2);
 		testRecipe2.Add ("Cup", 1);
-		AddRecipe ("fi_vil_forge_broadsword4", testRecipe2);
-		*/
+		AddRecipe ("Teleporter", testRecipe2);
 	}
 
 	void Init(Dictionary<string, int> internalItems, List<Recipe> recs, string filePath) {
@@ -52,7 +52,7 @@ public class CraftingTool : MonoBehaviour {
 	void OnCollisionEnter(Collision other) {
         InventoryItem script = other.gameObject.GetComponent(typeof(InventoryItem)) as InventoryItem;
         GameObject go = other.gameObject;
-
+		Debug.Log ("COLLISIONNN");
 		if (script != null && script.craftable) {
 			if (listOfInternalItems.ContainsKey (script.name)) {
 				int amount = 0;
@@ -93,7 +93,8 @@ public class CraftingTool : MonoBehaviour {
 		
 
 	void AddRecipe(string name, Dictionary<string, int> ingredients) {
-		recipes.Add (new Recipe(name, ingredients));
+		Debug.Log("adding recipe: " + name);
+			recipes.Add (new Recipe (name, ingredients));
 	}
 
     //will spawn the passed object into the map near the crafting table

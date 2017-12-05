@@ -13,16 +13,16 @@ public class MonsterData {
 	public static List<CraftingTool.Recipe> recipes = new List<CraftingTool.Recipe>();
 	public static List<string> signs; // TODO: use actual data structure
 
+	public static void Initialize() {
+		XMLReaderTool.Initialize();
+		reader = new XMLReaderTool(levelType);
+		levelType = "Cave"; // TODO: pick automatically? get from XML reader after reading level file?
+	}
+
 	// TODO: have some initialize monster data
 	
 	void Start () {
 		// initialize all necessary data structures	
-
-
-		XMLReaderTool.Initialize();
-
-		levelType = "Cave"; // TODO: pick automatically? get from XML reader after reading level file?
-		reader = new XMLReaderTool(levelType);
 
 	}
 }

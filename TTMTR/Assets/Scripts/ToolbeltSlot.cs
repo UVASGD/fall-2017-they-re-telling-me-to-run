@@ -5,16 +5,16 @@ using UnityEngine;
 public class ToolbeltSlot : MonoBehaviour {
 
     private SteamVR_TrackedObject trackedObj;
-    private InventoryItem touchingItem;
-    private InventoryItem heldItem;
+	public InventoryItem touchingItem;
+    public InventoryItem heldItem;
 
-    public ControllerGrabObjectAndTeleport leftController;
-    public ControllerGrabObjectAndTeleport rightController;
+    public ControllerGrabObject leftController;
+    public ControllerGrabObject rightController;
 
-    private SteamVR_Controller.Device Controller
-    {
-        get { return SteamVR_Controller.Input((int)trackedObj.index); }
-    }
+//    private SteamVR_Controller.Device Controller
+//    {
+//        get { return SteamVR_Controller.Input((int)trackedObj.index); }
+//    }
 
     void Awake()
     {
@@ -28,49 +28,64 @@ public class ToolbeltSlot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Controller.GetPressUp(SteamVR_Controller.ButtonMask.Trigger))
-        {
-            if (touchingItem && !heldItem)
-            {
-                heldItem = touchingItem;
-                touchingItem = null;
-                AddJoint(heldItem);
-            }
-        }
-        else if (Controller.GetPress(SteamVR_Controller.ButtonMask.Trigger))
-        {
-            if (heldItem && (heldItem == leftController.ObjectInHand ||
-                             heldItem == rightController.ObjectInHand))
-            {
-                heldItem = null;
-                var joint = GetComponent<FixedJoint>();
-                if (joint)
-                {
-                    joint.connectedBody = null;
-                    Destroy(joint);
-                }
-            }
-        }
+		UpdateController (leftController);
+		UpdateController (rightController);
     }
 
-    private void OnTriggerEnter(Collider other)
+	private void UpdateController(ControllerGrabObject cont) {
+		if (cont == null || cont.Controller == null) 
+		{
+			return;
+		}
+		if (cont.Controller.GetPressUp(SteamVR_Controller.ButtonMask.Trigger))
+		{
+			if (touchingItem && !heldItem)
+			{
+				heldItem = touchingItem;
+				touchingItem = null;
+				AddJoint(heldItem);
+			}
+		}
+		else if (cont.Controller.GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
+		{
+			if (heldItem && 
+				(heldItem.gameObject == leftController.objectInHand || heldItem.gameObject == leftController.collidingObject ||
+				 heldItem.gameObject == rightController.objectInHand || heldItem.gameObject == rightController.collidingObject))
+			{
+				heldItem = null;
+				var joint = GetComponent<FixedJoint>();
+				if (joint)
+				{
+					joint.connectedBody = null;
+					Destroy(joint);
+				}
+			}
+		}
+	}
+
+    void OnTriggerEnter(Collider other)
     {
-        if (touchingItem || heldItem) return;
+		Debug.Log ("TRIGGER " + other.gameObject.name);
+		if (touchingItem != null || heldItem != null) {
+			return;
+		}
         InventoryItem item = other.GetComponent<InventoryItem>();
-        if (item && (leftController.ObjectInHand == item ||
-                     rightController.ObjectInHand == item))
+		if (item != null && (leftController.objectInHand == other.gameObject ||
+			rightController.objectInHand == other.gameObject))
         {
+			Debug.Log ("1: Trigger Entered with Toolbelt");
             item.GetComponent<Highlightable>().Highlight();
             GetComponent<Highlightable>().Highlight();
             touchingItem = item;
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
         InventoryItem item = other.GetComponent<InventoryItem>();
-        if (item && item == touchingItem)
+        if (item != null && item == touchingItem)
         {
+			Debug.Log ("2: Trigger Exited with Toolbelt");
             item.GetComponent<Highlightable>().LowLight();
             GetComponent<Highlightable>().LowLight();
             touchingItem = null;

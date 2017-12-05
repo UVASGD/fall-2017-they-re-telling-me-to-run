@@ -26,10 +26,10 @@ public class ControllerGrabObject : MonoBehaviour
 {
     private SteamVR_TrackedObject trackedObj;
 
-    private GameObject collidingObject;
-    private GameObject objectInHand;
+    public GameObject collidingObject;
+    public GameObject objectInHand;
 
-    private SteamVR_Controller.Device Controller
+	public SteamVR_Controller.Device Controller
     {
         get { return SteamVR_Controller.Input((int)trackedObj.index); }
     }

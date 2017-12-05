@@ -1,0 +1,217 @@
+fileFormatVersion: 2
+guid: e960339bffb774088baeb3dbf6ee159a
+timeCreated: 1512335292
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: group_0
+    100002: group_1
+    100004: group_10
+    100006: group_11
+    100008: group_12
+    100010: group_13
+    100012: group_14
+    100014: group_15
+    100016: group_16
+    100018: group_2
+    100020: group_3
+    100022: group_4
+    100024: group_5
+    100026: group_6
+    100028: group_7
+    100030: group_8
+    100032: group_9
+    100034: ID241
+    100036: ID44
+    100038: ID48
+    100040: instance_0
+    100042: //RootNode
+    100044: skp_camera_Last_Saved_SketchUp_View
+    100046: teepee
+    400000: group_0
+    400002: group_1
+    400004: group_10
+    400006: group_11
+    400008: group_12
+    400010: group_13
+    400012: group_14
+    400014: group_15
+    400016: group_16
+    400018: group_2
+    400020: group_3
+    400022: group_4
+    400024: group_5
+    400026: group_6
+    400028: group_7
+    400030: group_8
+    400032: group_9
+    400034: ID241
+    400036: ID44
+    400038: ID48
+    400040: instance_0
+    400042: //RootNode
+    400044: skp_camera_Last_Saved_SketchUp_View
+    400046: teepee
+    2000000: skp_camera_Last_Saved_SketchUp_View
+    2300000: group_0
+    2300002: group_1
+    2300004: group_10
+    2300006: group_11
+    2300008: group_12
+    2300010: group_13
+    2300012: group_14
+    2300014: group_15
+    2300016: group_16
+    2300018: group_2
+    2300020: group_3
+    2300022: group_4
+    2300024: group_5
+    2300026: group_6
+    2300028: group_7
+    2300030: group_8
+    2300032: group_9
+    2300034: ID241
+    2300036: teepee
+    3300000: group_0
+    3300002: group_1
+    3300004: group_10
+    3300006: group_11
+    3300008: group_12
+    3300010: group_13
+    3300012: group_14
+    3300014: group_15
+    3300016: group_16
+    3300018: group_2
+    3300020: group_3
+    3300022: group_4
+    3300024: group_5
+    3300026: group_6
+    3300028: group_7
+    3300030: group_8
+    3300032: group_9
+    3300034: ID241
+    3300036: teepee
+    4300000: teepee
+    4300002: ID241
+    4300004: group_0
+    4300006: group_1
+    4300008: group_2
+    4300010: group_3
+    4300012: group_4
+    4300014: group_5
+    4300016: group_6
+    4300018: group_7
+    4300020: group_8
+    4300022: group_9
+    4300024: group_10
+    4300026: group_11
+    4300028: group_12
+    4300030: group_13
+    4300032: group_14
+    4300034: group_15
+    4300036: group_16
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FabricPlain0045_1_thumblarge
+    second: {fileID: 2100000, guid: 66b8a12cb251c46c19f2e5867b778ac9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FabricPlain0045_1_thumblarge_1
+    second: {fileID: 2100000, guid: 3f63958aba5144cfbb3b5a4f10e5f343, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: brown_2
+    second: {fileID: 2100000, guid: c4f4d6e365aa744578c087eb58767b47, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cloth069
+    second: {fileID: 2100000, guid: ea83c5e0496b74efda9895700104e922, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cloth069_0
+    second: {fileID: 2100000, guid: 58030e3a581414fc78e862b4bde8f1df, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

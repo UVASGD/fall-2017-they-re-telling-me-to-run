@@ -15,7 +15,7 @@ public class CraftingTool : MonoBehaviour {
 	}
 
 	public Dictionary<string, int> listOfInternalItems;
-	static List<Recipe> recipes;
+	static List<Recipe> recipes = new List<Recipe>();
 	string prefabFilePath;
 
 	public GameController gameCont;
@@ -30,16 +30,6 @@ public class CraftingTool : MonoBehaviour {
 		testRecipe1.Add ("Teleporter", 3);
 		AddRecipe ("Teleporter", testRecipe1);
 		*/
-		Dictionary<string, int> testRecipe2 = new Dictionary<string, int> ();
-		testRecipe2.Add ("Spoon", 2);
-		testRecipe2.Add ("Cup", 1);
-		AddRecipe ("Teleporter", testRecipe2);
-	}
-
-	void Init(Dictionary<string, int> internalItems, List<Recipe> recs, string filePath) {
-		listOfInternalItems = internalItems;
-		recipes = recs;
-		prefabFilePath = filePath;
 	}
 
 	void Update () {

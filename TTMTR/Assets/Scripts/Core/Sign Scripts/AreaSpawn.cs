@@ -14,7 +14,7 @@ public class AreaSpawn : MonoBehaviour {
         public int count;
     }
 
-    private SignWithCount[] possibleSigns;
+    public SignWithCount[] possibleSigns;
 
     public SignWithCount[] defaultSigns;
 
@@ -23,18 +23,27 @@ public class AreaSpawn : MonoBehaviour {
     public bool debugWalls;
     void Start()
     {
+        Debug.Log("Area Spawn Start");
         StartCoroutine(RealStart());
     }
 
 	[Inject]
 	void setSigns([Inject(Id="areaSignsToSpawn")]SignWithCount[] signsToSpawn)
     {
+        Debug.Log("Set the Signs"); 
         possibleSigns = signsToSpawn;
     }
 
     IEnumerator  RealStart() {
+        Debug.Log("Lets spawn some bois");
         if (possibleSigns == null)
         {
+            Debug.Log("Sings Was null");
+            possibleSigns = defaultSigns;
+        }
+        if(possibleSigns.Length == 0)
+        {
+            Debug.Log("Sign Array Length was zero");
             possibleSigns = defaultSigns;
         }
 

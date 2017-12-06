@@ -51,6 +51,9 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void RegisterDifficultyObservation(HasDifficulty diff) {
+		if (diffCont == null) {
+			diffCont = GetComponent<DifficultyController> ();
+		}
 		diffCont.AddDiffObject (diff);
 	}
 }

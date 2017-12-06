@@ -28,8 +28,9 @@ public class ToolbeltSlot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		/*
 		UpdateController (leftController);
-		UpdateController (rightController);
+		UpdateController (rightController);*/
     }
 
 	private void UpdateController(ControllerGrabObject cont) {
@@ -65,7 +66,6 @@ public class ToolbeltSlot : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-		Debug.Log ("TRIGGER " + other.gameObject.name);
 		if (touchingItem != null || heldItem != null) {
 			return;
 		}
@@ -73,8 +73,7 @@ public class ToolbeltSlot : MonoBehaviour {
 		if (item != null && (leftController.objectInHand == other.gameObject ||
 			rightController.objectInHand == other.gameObject))
         {
-			Debug.Log ("1: Trigger Entered with Toolbelt");
-            item.GetComponent<Highlightable>().Highlight();
+            if(item.GetComponent<Highlightable>()!= null) item.GetComponent<Highlightable>().Highlight();
             GetComponent<Highlightable>().Highlight();
             touchingItem = item;
         }
@@ -85,8 +84,34 @@ public class ToolbeltSlot : MonoBehaviour {
         InventoryItem item = other.GetComponent<InventoryItem>();
         if (item != null && item == touchingItem)
         {
-			Debug.Log ("2: Trigger Exited with Toolbelt");
-            item.GetComponent<Highlightable>().LowLight();
+            if(item.GetComponent<Highlightable>() != null) item.GetComponent<Highlightable>().LowLight();
+            GetComponent<Highlightable>().LowLight();
+            touchingItem = null;
+        }
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (touchingItem != null || heldItem != null)
+        {
+            return;
+        }
+        InventoryItem item = other.gameObject.GetComponent<InventoryItem>();
+        if (item != null && (leftController.objectInHand == other.gameObject ||
+            rightController.objectInHand == other.gameObject))
+        {
+            if (item.GetComponent<Highlightable>() != null) item.GetComponent<Highlightable>().Highlight();
+            GetComponent<Highlightable>().Highlight();
+            touchingItem = item;
+        }
+    }
+
+    void OnCollisionExit(Collision other)
+    {
+        InventoryItem item = other.gameObject.GetComponent<InventoryItem>();
+        if (item != null && item == touchingItem)
+        {
+            if(item.GetComponent<Highlightable>() != null) item.GetComponent<Highlightable>().LowLight();
             GetComponent<Highlightable>().LowLight();
             touchingItem = null;
         }

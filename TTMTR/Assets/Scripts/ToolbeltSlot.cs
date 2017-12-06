@@ -39,7 +39,8 @@ public class ToolbeltSlot : MonoBehaviour {
 		}
 		if (cont.Controller.GetHairTriggerUp())
 		{
-			if (touchingItem && !heldItem)
+			if (!heldItem && touchingItem && 
+                (touchingItem.gameObject == cont.objectInHand || touchingItem.gameObject == cont.lastObjectInHand))
 			{
 				heldItem = touchingItem;
 				touchingItem = null;
@@ -48,8 +49,8 @@ public class ToolbeltSlot : MonoBehaviour {
 		}
 		else if (cont.Controller.GetHairTriggerDown())
 		{
-			if (heldItem && (heldItem.gameObject == cont.objectInHand || 
-				             heldItem.gameObject == cont.collidingObject)
+			if (heldItem && (heldItem.gameObject == cont.objectInHand ||
+				             heldItem.gameObject == cont.collidingObject))
 			{
 				heldItem = null;
 				var joint = GetComponent<FixedJoint>();

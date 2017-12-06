@@ -14,13 +14,20 @@ public class MMUI : MonoBehaviour {
     public List<GameObject> difficulties;
     public List<GameObject> debugs;
 
-    public float FADE_DEC_PER_S;
+    public SceneMgr sceneManager;
 
     // Use this for initialization
     void Start() {
         beginBtn.GetComponent<FillMMButton>().OnFilled = (int i) => OpenDifficultyMenu(i);
         creditBtn.GetComponent<FillMMButton>().OnFilled = (int i) => OpenCreditsMenu(i);
-        difficulties[0].GetComponent<FillMMButton>().OnFilled = (int i) => OpenCreditsMenu(i);
+        difficulties[0].GetComponent<FillMMButton>().OnFilled = (int i) => LoadNoviceLevel(i);
+        difficulties[1].GetComponent<FillMMButton>().OnFilled = (int i) => LoadAdeptLevel(i);
+        difficulties[2].GetComponent<FillMMButton>().OnFilled = (int i) => LoadMasterLevel(i);
+
+        if (sceneManager == null)
+        {
+            sceneManager = GameObject.Find("scenemgr").GetComponent<SceneMgr>();
+        }
     }
 
     // Update is called once per frame
@@ -40,29 +47,19 @@ public class MMUI : MonoBehaviour {
         Credtits.SetActive(true);
     }
 
-    private void LoadNoviceLevel()
+    private void LoadNoviceLevel(int i)
     {
-
+        sceneManager.LoadCave();
     }
 
-    private void LoadAdeptLevel()
+    private void LoadAdeptLevel(int i)
     {
-
+        sceneManager.LoadForest();
     }
 
-    private void LoadMasterLevel()
+    private void LoadMasterLevel(int i)
     {
-
-    }
-
-    private void LoadCave()
-    {
-        
-    }
-
-    private void LoadForest()
-    {
-
+        sceneManager.LoadForest();
     }
 
 }

@@ -132,6 +132,10 @@ public class RatController : MonoBehaviour, Detector, HasDifficulty {
 		nose.gameObject.transform.localScale = nose.gameObject.transform.localScale - settings.incNoseScale;
 	}
 
+	public void OnCollisionEnter(Collision coll) {
+		// Take in peppermint and knife
+	}
+
 	[System.Serializable]
 	public class Settings {
 		public float initSpeed = 5.0f;

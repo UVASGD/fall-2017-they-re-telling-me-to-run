@@ -55,6 +55,7 @@ public class WendigoController : MonoBehaviour, Detector, HasDifficulty {
 	// Use this for initialization
 	void Start () {
 		gameCont = GameObject.Find("GameController").GetComponent<GameController>();
+		trap = GameObject.Find("WendigoTrap").GetComponent<Trap>();
 		Transform wanderParent = GameObject.Find("Wander Points").transform;
 		wanderPoints = new List<Transform>();
 		for (int i = 0; i < wanderParent.childCount; i++) {

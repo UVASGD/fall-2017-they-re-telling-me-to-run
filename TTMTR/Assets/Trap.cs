@@ -18,7 +18,7 @@ public class Trap : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col) {
-		if (col.gameObject.name == "lure") {
+		if (col.gameObject.tag == "lure") {
 			lure = col.gameObject;
 			activateTrap ();
 		}

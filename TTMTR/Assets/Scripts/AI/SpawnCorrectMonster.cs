@@ -11,6 +11,8 @@ public class SpawnCorrectMonster : MonoBehaviour {
 		Debug.Log("Monster Name: " + XMLReaderTool.monsterName);
 		GameObject monster = Resources.Load(MONSTER_PREFABS + XMLReaderTool.monsterName, typeof(GameObject)) as GameObject;
 		Instantiate(monster, transform.position, transform.rotation);
+		Debug.Log("Monster Spawn Position: " + transform.position);
+		Debug.Log("Monster position: " + monster.transform.position);
 	}
 	
 	// Update is called once per frame

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+
+<monster name = "Cloud">
+	<recipe number = "1">
+		<output> Knife </output>
+		<input number = "1"> Potato </input>
+		<input number = "2"> Potato </input>
+		<input number = "3"> Potato </input>
+	</recipe>
+	<!-- additional recipes here --> 
+</monster>

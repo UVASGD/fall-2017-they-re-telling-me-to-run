@@ -1,5 +1,6 @@
 <levels>
 	<levelType name="cave">
 		<monster name="werewolf"></monster>
+		<monster name="wendigo"></monster>
 	</levelType>
 </levels>

@@ -30,7 +30,6 @@ public class XMLReaderTool {
 	
 	private static void ReadLevelFile() {
 		XmlReader reader = XmlReader.Create(XML_PATH + "levels.xml");
-		// TODO: find a list of monsters, set actual monster
 
 		List<string> levelTypes = new List<string> ();
 

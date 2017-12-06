@@ -14,22 +14,15 @@ public class CraftingTool : MonoBehaviour {
 		}
 	}
 
-	public Dictionary<string, int> listOfInternalItems;
-	static List<Recipe> recipes;
-	string prefabFilePath;
+	public Dictionary<string, int> listOfInternalItems = new Dictionary<string, int>();
+	static List<Recipe> recipes = new List<Recipe>();
+	string prefabFilePath = "Prefabs/Objects/";
 
 	public GameController gameCont;
 
 	void Start () {
-		// Test Recipes (TODO: get rid of these two things when DI is finished)
-		Debug.Log("I'm initializing a crafting tool1");
+
 		XMLReaderTool myReader = new XMLReaderTool("Cave");
-		Debug.Log("I'm initializing a crafting tool1");
-		/*
-		Dictionary<string, int> testRecipe1 = new Dictionary<string, int> ();
-		testRecipe1.Add ("Teleporter", 3);
-		AddRecipe ("Teleporter", testRecipe1);
-		*/
 	}
 
 	void Init(List<Recipe> recs, string filePath) {
@@ -44,7 +37,7 @@ public class CraftingTool : MonoBehaviour {
         }
 	}
 
-	void OnCollisionEnter(Collision other) {
+	void OnTriggerEnter(Collider other) {
         InventoryItem script = other.gameObject.GetComponent(typeof(InventoryItem)) as InventoryItem;
         GameObject go = other.gameObject;
 		Debug.Log ("COLLISIONNN");
@@ -95,8 +88,8 @@ public class CraftingTool : MonoBehaviour {
     //will spawn the passed object into the map near the crafting table
     //To do - determine the crafting tables location and spawn near it
     void ThrowOut(string name, int i) {
-
-		GameObject instance = Instantiate(Resources.Load(prefabFilePath + name, typeof(GameObject))) as GameObject;
+		Debug.Log (prefabFilePath + " " + name);
+		GameObject instance = Instantiate(Resources.Load(prefabFilePath + name) as GameObject);
 		Vector3 pos = transform.position;
 		pos.x += 1 + i;
 		pos.y += 1;

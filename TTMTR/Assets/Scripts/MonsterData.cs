@@ -18,11 +18,5 @@ public class MonsterData {
 		reader = new XMLReaderTool(levelType);
 		levelType = "Cave"; // TODO: pick automatically? get from XML reader after reading level file?
 	}
-
-	// TODO: have some initialize monster data
-	
-	void Start () {
-		// initialize all necessary data structures	
-
-	}
+		
 }

@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:TTMTR/Assets/Totem pole/Textures.meta
+guid: 5f6de9a10d0090b4096524dc352dc5fe
+folderAsset: yes
+timeCreated: 1512515612
+=======
 guid: 71f4e1222b7a45c4f9be8ab819279f1e
 folderAsset: yes
 timeCreated: 1512337894
+>>>>>>> bc5df6459e5e94a37e706eae04c2e3c2276fc562:TTMTR/Assets/Totem pole/Textures.meta
 licenseType: Free
 DefaultImporter:
   externalObjects: {}

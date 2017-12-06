@@ -28,8 +28,9 @@ public class ToolbeltSlot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		/*
 		UpdateController (leftController);
-		UpdateController (rightController);
+		UpdateController (rightController);*/
     }
 
 	private void UpdateController(ControllerGrabObject cont) {

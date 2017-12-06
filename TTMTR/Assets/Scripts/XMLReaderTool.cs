@@ -8,10 +8,11 @@ using System.Collections.Generic;
 public class XMLReaderTool {
 
 	static string XML_PATH = "Assets/Scripts/XML/";
-	static string levelType;
-	static string monsterName;
-    public static List<Sign> spotSignsPrefabs;   //this and areaSigns are temp, and will likely be changed inorder to integrate with signs
-	public static List<AreaSpawn.SignWithCount> areaSigns;
+	static string SIGNS_PATH = "Prefabs/Signs/";
+	public static string levelType;
+	public static string monsterName;
+	public static List<Sign> spotSignsPrefabs = new List<Sign>();   //this and areaSigns are temp, and will likely be changed inorder to integrate with signs
+	public static List<AreaSpawn.SignWithCount> areaSigns = new List<AreaSpawn.SignWithCount>();
 	
 	public XMLReaderTool (string level) {
 		Initialize ();
@@ -107,7 +108,7 @@ public class XMLReaderTool {
             if (reader.NodeType == XmlNodeType.Element) {
 
                 if (reader.Name == "prefab") {
-					prefab = Resources.Load("Prefabs/Signs/" + reader.Value, typeof(GameObject)) as GameObject;
+					prefab = Resources.Load(SIGNS_PATH + reader.Value, typeof(GameObject)) as GameObject;
 					sign = prefab.GetComponent<Sign>();
                 } else if (reader.Name == "count") {
                     int.TryParse(reader.Value, out count);
@@ -138,7 +139,7 @@ public class XMLReaderTool {
     private static void ReadSpotSigns(System.Xml.XmlReader reader) {
         while (reader.Read()) {
             if (reader.NodeType == XmlNodeType.Element && reader.Name == "prefab") {
-				GameObject prefab = Resources.Load("Prefabs/Signs/" + reader.Value, typeof(GameObject)) as GameObject;
+				GameObject prefab = Resources.Load(SIGNS_PATH + reader.Value, typeof(GameObject)) as GameObject;
 				spotSignsPrefabs.Add(prefab.GetComponent<Sign>());
             }
         }

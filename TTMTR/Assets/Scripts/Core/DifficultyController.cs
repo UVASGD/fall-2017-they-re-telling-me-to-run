@@ -57,6 +57,9 @@ public class DifficultyController : MonoBehaviour {
 	}
 
 	public void AddDiffObject(HasDifficulty diff) {
+		if (diffObjects == null) {
+			diffObjects = new List<HasDifficulty> ();
+		}
 		diffObjects.Add (diff);
 	}
 }

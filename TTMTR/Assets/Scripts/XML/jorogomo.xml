@@ -6,23 +6,19 @@
 		  <sign>
 			<prefab>Sphere</prefab>
 			<count>30</count>
-			<type>Floor</type>
 		  </sign>
 		  <sign>
 			<prefab>Nest</prefab>
 			<count>50</count>
-			<type>Floor</type>
 		  </sign>
 		  <!-- add additional AreaSigns here, must have a prefab and count attribute-->
 		</AreaSpawns>
 		<SpotSigns>
 		  <sign>
 			<prefab>Cube</prefab>
-			<type>Floor</type>
 		  </sign>
 		  <sign>
 			<prefab>Sphere</prefab>
-			<type>Floor</type>
 		  </sign>
 		  <!-- add additional SpotSigns here, must have a prefab attribute only-->
 		</SpotSigns>

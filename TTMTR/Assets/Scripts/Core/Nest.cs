@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Nest : MonoBehaviour {
 
-	List<string> combinables = new List<string>{"potato", "taco"};
+	List<string> combinables = new List<string>{"Knife"};
 	public UnityEngine.UI.Text message;
 	public GameObject gameController;
 

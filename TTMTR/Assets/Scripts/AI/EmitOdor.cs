@@ -6,6 +6,8 @@ public class EmitOdor : MonoBehaviour {
 
 	public float timeBetweenEmissions;
 
+	public Transform parent;
+
 	public GameObject odor;
 
 	float curTimer;
@@ -29,6 +31,10 @@ public class EmitOdor : MonoBehaviour {
 		float randX = gameObject.transform.position.x + Random.Range(-1.0f, 1.0f);
 		float randZ = gameObject.transform.position.z + Random.Range(-1.0f, 1.0f);
 
-		Instantiate(odor, new Vector3(randX, gameObject.transform.position.y, randZ), Quaternion.identity);
+		if (parent == null) {
+			Instantiate(odor, new Vector3(randX, gameObject.transform.position.y, randZ), Quaternion.identity);
+		} else {
+			Instantiate(odor, new Vector3(randX, gameObject.transform.position.y, randZ), Quaternion.identity, parent);
+		}
 	}
 }

@@ -17,11 +17,10 @@ public class DestroyIfCollidesWith : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision collisionInfo)
+    void OnTriggerEnter(Collider collisionInfo)
     {
         if (collisionInfo.gameObject.tag == "DontCollideWith")
         {
-            Debug.Log("wreak this mofo");
             Destroy(gameObject);
         }
         

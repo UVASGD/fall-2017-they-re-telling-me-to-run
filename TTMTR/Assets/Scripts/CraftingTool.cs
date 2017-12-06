@@ -27,7 +27,7 @@ public class CraftingTool : MonoBehaviour {
 	}
 
 	[Inject]
-	void Init([Inject(id="recipeList")]List<Recipe> recs) {
+	void Init([Inject(Id="recipeList")]List<Recipe> recs) {
 		recipes = recs;
 	}
 

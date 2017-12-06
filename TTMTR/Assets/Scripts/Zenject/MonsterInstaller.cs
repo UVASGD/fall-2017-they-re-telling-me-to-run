@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 using Zenject;
 
 public class MonsterInstaller : MonoInstaller<MonsterInstaller>
@@ -7,6 +8,6 @@ public class MonsterInstaller : MonoInstaller<MonsterInstaller>
     public override void InstallBindings()
     {
 		MonsterData.Initialize();
-		Container.Bind<string>().WithId("recipeList").FromInstance(MonsterData.recipes);
+		Container.Bind<List<CraftingTool.Recipe>>().WithId("recipeList").FromInstance(MonsterData.recipes);
     }
 }

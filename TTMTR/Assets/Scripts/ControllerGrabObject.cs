@@ -28,6 +28,7 @@ public class ControllerGrabObject : MonoBehaviour
 
     public GameObject collidingObject;
     public GameObject objectInHand;
+    public GameObject lastObjectInHand;
 
 	public SteamVR_Controller.Device Controller
     {
@@ -52,12 +53,10 @@ public class ControllerGrabObject : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        if (!collidingObject)
+        if (other.gameObject == collidingObject)
         {
-            return;
+            collidingObject = null;
         }
-
-        collidingObject = null;
     }
 
     private void SetCollidingObject(Collider col)
@@ -72,6 +71,7 @@ public class ControllerGrabObject : MonoBehaviour
 
     void Update()
     {
+        lastObjectInHand = null;
         if (Controller.GetHairTriggerDown())
         {
             if (collidingObject)
@@ -84,6 +84,7 @@ public class ControllerGrabObject : MonoBehaviour
         {
             if (objectInHand)
             {
+                lastObjectInHand = objectInHand;
                 ReleaseObject();
             }
         }

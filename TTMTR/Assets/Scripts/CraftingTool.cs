@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class CraftingTool : MonoBehaviour {
 
@@ -25,9 +26,9 @@ public class CraftingTool : MonoBehaviour {
 		XMLReaderTool myReader = new XMLReaderTool("Cave");
 	}
 
-	void Init(List<Recipe> recs, string filePath) {
+	[Inject]
+	void Init([Inject(id="recipeList")]List<Recipe> recs) {
 		recipes = recs;
-		prefabFilePath = filePath;
 	}
 
 	void Update () {

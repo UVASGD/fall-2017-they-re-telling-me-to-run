@@ -1,22 +1,28 @@
-﻿<root>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<root>
 	<Signs>
 		<AreaSpawns>
 		  <sign>
 			<prefab>Sphere</prefab>
 			<count>30</count>
+			<type>Floor</type>
 		  </sign>
 		  <sign>
 			<prefab>Nest</prefab>
 			<count>50</count>
+			<type>Floor</type>
 		  </sign>
 		  <!-- add additional AreaSigns here, must have a prefab and count attribute-->
 		</AreaSpawns>
 		<SpotSigns>
 		  <sign>
 			<prefab>Cube</prefab>
+			<type>Floor</type>
 		  </sign>
 		  <sign>
 			<prefab>Sphere</prefab>
+			<type>Floor</type>
 		  </sign>
 		  <!-- add additional SpotSigns here, must have a prefab attribute only-->
 		</SpotSigns>
@@ -42,23 +48,6 @@
 				</Ingredient>
 				<Ingredient>
 					<Name>Mint</Name>
-					<Quantity>1</Quantity>
-				</Ingredient>
-			</Ingredients>
-		</Recipe>
-		<Recipe>
-			<Object>Necklace</Object>
-			<Ingredients>
-				<Ingredient>
-					<Name>String</Name>
-					<Quantity>1</Quantity>
-				</Ingredient>
-				<Ingredient>
-					<Name>Beads</Name>
-					<Quantity>1</Quantity>
-				</Ingredient>
-				<Ingredient>
-					<Name>Magic Bead</Name>
 					<Quantity>1</Quantity>
 				</Ingredient>
 			</Ingredients>

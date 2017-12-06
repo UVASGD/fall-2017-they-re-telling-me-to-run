@@ -7,6 +7,7 @@ public class SignController : MonoBehaviour {
     // Use this for initialization
     private SignSpawn[] signMarkers;
     public List<Sign> possibleSigns;
+
 	void Start () {
         signMarkers = FindObjectsOfType(typeof(SignSpawn)) as SignSpawn[];
         foreach(SignSpawn sign in signMarkers)

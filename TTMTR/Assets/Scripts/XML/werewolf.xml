@@ -7,7 +7,7 @@
 		  </sign>
 		  <sign>
 			<prefab>Nest</prefab>
-			<sign>50</sign>
+			<count>50</count>
 		  </sign>
 		  <!-- add additional AreaSigns here, must have a prefab and count attribute-->
 		</AreaSpawns>

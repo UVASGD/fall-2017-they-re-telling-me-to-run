@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class AreaSpawn : MonoBehaviour {
 
@@ -25,7 +26,8 @@ public class AreaSpawn : MonoBehaviour {
         StartCoroutine(RealStart());
     }
 
-    void setSigns(SignWithCount[] signsToSpawn)
+	[Inject]
+	void setSigns([Inject(Id="areaSignsToSpawn")]SignWithCount[] signsToSpawn)
     {
         possibleSigns = signsToSpawn;
     }

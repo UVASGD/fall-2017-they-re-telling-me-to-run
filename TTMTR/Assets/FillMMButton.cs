@@ -10,7 +10,7 @@ public class FillMMButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
 	[SerializeField]
 	private Image colorButton;
-	private float AMOUNT_PER_MS = 0.1f;
+	private float AMOUNT_PER_MS = 0.5f;
 
 	private float TIME_TO_WAIT = 1.2f;
 	[SerializeField]
@@ -36,7 +36,10 @@ public class FillMMButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     void OnTriggerEnter(Collider coll)
     {
-        BeginFill();
+        if (coll.gameObject.GetComponent<ControllerGrabObject>() != null)
+        {
+            BeginFill();
+        }
     }
 
     void OnTriggerExit(Collider coll)

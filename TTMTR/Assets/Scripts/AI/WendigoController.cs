@@ -21,6 +21,11 @@ public class WendigoController : MonoBehaviour, Detector, HasDifficulty {
 
 	bool inTrees = false;
 
+	bool stuck = false;
+	private Vector3 savedDest;
+	private float maxStuckTimer = 7.0f;
+	private float curStuckTimer;
+
 	[SerializeField]
 	private float maxSoundTimer = 0.25f;
 	private float curSoundTimer;
@@ -38,6 +43,10 @@ public class WendigoController : MonoBehaviour, Detector, HasDifficulty {
 	DetectionObject curDetectionObject;
 
 	public GameController gameCont;
+
+	public string fatalObjectName = "potato";
+
+	public Trap trap;
 
 	[SerializeField]
 	private Settings settings;
@@ -89,13 +98,26 @@ public class WendigoController : MonoBehaviour, Detector, HasDifficulty {
 		} else {
 			curSoundTimer -= Time.deltaTime;
 		}
+
 		if (curTreeSwitchTimer <= 0.0f) {
 			toggleInTrees ();
 			curTreeSwitchTimer = maxTreeSwitchTimer;
 		} else {
 			curTreeSwitchTimer -= Time.deltaTime;
 		}
-		navAgent.destination = curDest;
+
+		if (stuck && curStuckTimer > 0) {
+			curStuckTimer -= Time.deltaTime;
+			Debug.Log ("stuck!");
+		} else if (stuck && curStuckTimer <= 0) {
+			Debug.Log ("unstuck!");
+			stuck = false;
+			// restore old destination
+			navAgent.destination = savedDest;
+		}
+		if (!stuck) {
+			navAgent.destination = curDest;
+		}
 	}
 
 	public void Detect(DetectionObject detected) {
@@ -145,6 +167,32 @@ public class WendigoController : MonoBehaviour, Detector, HasDifficulty {
 		rec.SetThreshold (rec.soundThreshold - settings.incThreshold);
 		eyes.gameObject.transform.localScale = eyes.gameObject.transform.localScale - settings.incEyeScale;
 		nose.gameObject.transform.localScale = nose.gameObject.transform.localScale - settings.incNoseScale;
+	}
+
+	void becomeStuck() {
+		stuck = true;
+		curStuckTimer = maxStuckTimer;
+
+		// set destination to current position
+		savedDest = navAgent.destination;
+		navAgent.destination = this.gameObject.transform.position;
+
+	}
+
+	void OnTriggerEnter(Collider col) {
+		// if touches circle around lure, get stuck
+		if (col.gameObject.tag == "trap" && !stuck && trap.active) {
+			becomeStuck ();
+			trap.deactivateTrap ();
+		}
+	}
+
+	void OnCollisionEnter(Collision col) {
+		// if touches item while stuck, player wins
+		// need to test this
+		if (col.gameObject.name == fatalObjectName && stuck) {
+			gameCont.winGame ();
+		}
 	}
 
 

@@ -65,14 +65,4 @@ public class MMUI : MonoBehaviour {
 
     }
 
-    IEnumerator FadeAudioOut(AudioSource toFade)
-    {
-        if(toFade.volume > 0)
-        {
-            toFade.volume -= FADE_DEC_PER_S * Time.deltaTime;
-            yield return null;
-        }
-        toFade.Stop();
-    }
-
 }

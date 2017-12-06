@@ -64,6 +64,14 @@ public class LaserPointer : MonoBehaviour
 
     void Update()
     {
+        if(laser == null)
+        {
+            laser = Instantiate(laserPrefab);
+            laserTransform = laser.transform;
+            reticle = Instantiate(teleportReticlePrefab);
+            teleportReticleTransform = reticle.transform;
+        }
+
         // Is the touchpad held down?
         if (Controller.GetPress(SteamVR_Controller.ButtonMask.Touchpad))
         {

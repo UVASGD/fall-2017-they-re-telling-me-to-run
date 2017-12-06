@@ -59,7 +59,7 @@ public class MMUI : MonoBehaviour {
 
     private void LoadMasterLevel(int i)
     {
-        sceneManager.LoadForest();
+        sceneManager.LoadOldCave();
     }
 
 }

@@ -9,6 +9,8 @@ public class SceneMgr : MonoBehaviour
     public GameObject CameraRig;
 
     private Vector3 forestStart = new Vector3(514.9f, 6.1f, 674.9f);
+    private Vector3 caveStart = new Vector3(267.1f, 3.05f, 476.52f);
+    private Vector3 oldCaveStart = new Vector3(261.0f, 0.62f, 197.0f);
 
     // Use this for initialization
     void Start()
@@ -26,6 +28,7 @@ public class SceneMgr : MonoBehaviour
     {
         soundMgr.FadeMMforCave();
         StartCoroutine(LoadYourAsyncScene(1));
+        CameraRig.transform.position = caveStart;
     }
 
     public void LoadForest()
@@ -33,6 +36,13 @@ public class SceneMgr : MonoBehaviour
        soundMgr.FadeMMforForest();
        StartCoroutine(LoadYourAsyncScene(2));
        CameraRig.transform.position = forestStart;
+    }
+
+    public void LoadOldCave()
+    {
+        soundMgr.FadeMMforCave();
+        StartCoroutine(LoadYourAsyncScene(3));
+        CameraRig.transform.position = oldCaveStart;
     }
 
     public void LoadYourScene(int index)

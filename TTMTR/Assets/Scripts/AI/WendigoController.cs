@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class WendigoController : MonoBehaviour, Detector, HasDifficulty {
 
@@ -53,6 +54,13 @@ public class WendigoController : MonoBehaviour, Detector, HasDifficulty {
 
 	// Use this for initialization
 	void Start () {
+		gameCont = GameObject.Find("GameController").GetComponent<GameController>();
+		trap = GameObject.Find("WendigoTrap").GetComponent<Trap>();
+		Transform wanderParent = GameObject.Find("Wander Points").transform;
+		wanderPoints = new List<Transform>();
+		for (int i = 0; i < wanderParent.childCount; i++) {
+			wanderPoints.Add(wanderParent.GetChild(i).transform);
+		}
 		curDest = gameObject.transform.position;
 		detectedObjects = new PriorityQueue<DetectionObject> ();
 		rec = GetComponent<SoundReceiver>();

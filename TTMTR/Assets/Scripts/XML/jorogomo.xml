@@ -1,4 +1,6 @@
-﻿<root>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<root>
 	<Signs>
 		<AreaSpawns>
 		  <sign>
@@ -42,23 +44,6 @@
 				</Ingredient>
 				<Ingredient>
 					<Name>Mint</Name>
-					<Quantity>1</Quantity>
-				</Ingredient>
-			</Ingredients>
-		</Recipe>
-		<Recipe>
-			<Object>Necklace</Object>
-			<Ingredients>
-				<Ingredient>
-					<Name>String</Name>
-					<Quantity>1</Quantity>
-				</Ingredient>
-				<Ingredient>
-					<Name>Beads</Name>
-					<Quantity>1</Quantity>
-				</Ingredient>
-				<Ingredient>
-					<Name>Magic Bead</Name>
 					<Quantity>1</Quantity>
 				</Ingredient>
 			</Ingredients>

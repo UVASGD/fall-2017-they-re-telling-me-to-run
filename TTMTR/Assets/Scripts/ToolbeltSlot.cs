@@ -54,10 +54,10 @@ public class ToolbeltSlot : MonoBehaviour {
 			{
 				heldItem = null;
 				var joint = GetComponent<FixedJoint>();
-				if (joint)
+				if (joint != null)
 				{
 					joint.connectedBody = null;
-					Destroy(joint);
+					Destroy(GetComponent<FixedJoint>());
 				}
 			}
 		}

@@ -61,7 +61,7 @@ public class ControllerGrabObject : MonoBehaviour
 
     private void SetCollidingObject(Collider col)
     {
-        if (collidingObject || !col.GetComponent<Rigidbody>())
+        if (collidingObject || !col.GetComponent<Rigidbody>() || !col.gameObject.GetComponent<InventoryItem>())
         {
             return;
         }

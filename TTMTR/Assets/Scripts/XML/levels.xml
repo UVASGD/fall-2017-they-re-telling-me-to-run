@@ -1,0 +1,5 @@
+<levels>
+	<levelType name="cave">
+		<monster name="werewolf"></monster>
+	</levelType>
+</levels>

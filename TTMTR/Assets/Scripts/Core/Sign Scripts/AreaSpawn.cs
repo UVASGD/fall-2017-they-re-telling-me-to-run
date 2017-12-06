@@ -20,6 +20,12 @@ public class AreaSpawn : MonoBehaviour {
     public bool debugWalls;
     void Start()
     {
+        // StartCoroutine(RealStart());
+    }
+
+    void SpawnSigns(SignWithCount[] signsToSpawn)
+    {
+        possibleSigns = signsToSpawn;
         StartCoroutine(RealStart());
     }
 

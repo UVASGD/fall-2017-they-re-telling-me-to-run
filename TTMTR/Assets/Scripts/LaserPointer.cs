@@ -28,6 +28,7 @@ public class LaserPointer : MonoBehaviour
     public Transform headTransform; // The camera rig's head
     public Vector3 teleportReticleOffset; // Offset from the floor for the reticle to avoid z-fighting
     public LayerMask teleportMask; // Mask to filter out areas where teleports are allowed
+    public string teleportTagMask;
 
     private SteamVR_TrackedObject trackedObj;
 
@@ -71,15 +72,18 @@ public class LaserPointer : MonoBehaviour
             // Send out a raycast from the controller
             if (Physics.Raycast(trackedObj.transform.position, transform.forward, out hit, 100, teleportMask))
             {
-                hitPoint = hit.point;
+                if (teleportTagMask == "" || hit.collider.gameObject.tag == teleportTagMask)
+                {
+                    hitPoint = hit.point;
 
-                ShowLaser(hit);
+                    ShowLaser(hit);
 
-                //Show teleport reticle
-                reticle.SetActive(true);
-                teleportReticleTransform.position = hitPoint + teleportReticleOffset;
+                    //Show teleport reticle
+                    reticle.SetActive(true);
+                    teleportReticleTransform.position = hitPoint + teleportReticleOffset;
 
-                shouldTeleport = true;
+                    shouldTeleport = true;
+                }
             }
         }
         else // Touchpad not held down, hide laser & teleport reticle

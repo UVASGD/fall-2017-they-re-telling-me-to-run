@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class SignController : MonoBehaviour {
 
@@ -8,6 +9,7 @@ public class SignController : MonoBehaviour {
     private SignSpawn[] signMarkers;
     private List<Sign> possibleSigns;
     public List<Sign> defaultSigns;
+
     void Start() {
         if(possibleSigns == null)
         {
@@ -20,7 +22,8 @@ public class SignController : MonoBehaviour {
         }
     }
 
-    public void setSigns(List<Sign> signs)
+	[Inject]
+	public void setSigns([Inject(Id="signsToSpawn")]List<Sign> signs)
     {
         possibleSigns = signs;
     }

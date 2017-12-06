@@ -16,9 +16,12 @@ public class HealthController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (monster == null) {
+			monster = GameObject.FindGameObjectWithTag ("Monster");
+		}
 		float distance = Vector3.Distance(camera.transform.position,monster.transform.position);
 
-		if (distance < 5) {
+		if (distance < 1) {
 			takeDamage (5000);
 		}
 	}

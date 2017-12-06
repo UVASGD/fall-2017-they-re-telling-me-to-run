@@ -1,4 +1,4 @@
-<root>
+﻿<root>
 	<Signs>
 		<AreaSpawns>
 		  <sign>
@@ -30,14 +30,31 @@
 	</WinConditions>
 	<Recipes>
 		<Recipe>
-			<Object>Teleporter</Object>
+			<Object>SoundLure</Object>
 			<Ingredients>
 				<Ingredient>
-					<Name>Spoon</Name>
-					<Quantity>2</Quantity>
+					<Name>Mushrooms</Name>
+					<Quantity>1</Quantity>
 				</Ingredient>
 				<Ingredient>
-					<Name>Cup</Name>
+					<Name>Garlic</Name>
+					<Quantity>1</Quantity>
+				</Ingredient>
+				<Ingredient>
+					<Name>Mint</Name>
+					<Quantity>1</Quantity>
+				</Ingredient>
+			</Ingredients>
+		</Recipe>
+		<Recipe>
+			<Object>Necklace</Object>
+			<Ingredients>
+				<Ingredient>
+					<Name>String</Name>
+					<Quantity>1</Quantity>
+				</Ingredient>
+				<Ingredient>
+					<Name>Beads</Name>
 					<Quantity>1</Quantity>
 				</Ingredient>
 			</Ingredients>

@@ -11,6 +11,7 @@ public class MMUI : MonoBehaviour {
 
     public GameObject beginBtn;
     public GameObject creditBtn;
+	public GameObject backBtn;
     public List<GameObject> difficulties;
     public List<GameObject> debugs;
 
@@ -20,6 +21,7 @@ public class MMUI : MonoBehaviour {
     void Start() {
         beginBtn.GetComponent<FillMMButton>().OnFilled = (int i) => OpenDifficultyMenu(i);
         creditBtn.GetComponent<FillMMButton>().OnFilled = (int i) => OpenCreditsMenu(i);
+		backBtn.GetComponent<FillMMButton> ().OnFilled = (int i) => ResetToMain (i);
         difficulties[0].GetComponent<FillMMButton>().OnFilled = (int i) => LoadNoviceLevel(i);
         difficulties[1].GetComponent<FillMMButton>().OnFilled = (int i) => LoadAdeptLevel(i);
         difficulties[2].GetComponent<FillMMButton>().OnFilled = (int i) => LoadMasterLevel(i);
@@ -46,6 +48,12 @@ public class MMUI : MonoBehaviour {
         PrimaryMenu.SetActive(false);
         Credtits.SetActive(true);
     }
+
+	private void ResetToMain(int i)
+	{
+		PrimaryMenu.SetActive(true);
+		Credtits.SetActive(false);
+	}
 
     private void LoadNoviceLevel(int i)
     {

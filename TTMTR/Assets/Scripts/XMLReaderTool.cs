@@ -58,11 +58,6 @@ public class XMLReaderTool {
 			}
 		}
 	}
-
-    /*
-     * This method will be called from ReadMonsterFile() and will read in an <AreaSigns> section of the xml file, 
-     * which is composed of <signs>s holding <prefab>s and <count>s
-     */
     private static void ReadAreaSigns(XmlReader reader) {
         int count = -10;    //integers can't be set to null, so -10 is an impossible value that's a stand in for null
         string prefab = null;
@@ -90,10 +85,6 @@ public class XMLReaderTool {
         reader.Close();
     }
 
-    /*
-     * This method will be called from ReadMonsterFile() and will read in an <SpotSigns> section of the xml file, 
-     * which is composed of <signs>s holding only <prefab>s
-     */
     private static void ReadSpotSigns(XmlReader reader) {
         while (reader.Read()) {
             if (reader.NodeType == XmlNodeType.Element && reader.Name == "prefab") {
@@ -105,10 +96,6 @@ public class XMLReaderTool {
     }
 
 
-    /*
-     * Ending read signs sub-section
-     * Begining read recipes sub-section
-     */
 
     private static void ReadRecipes(XmlReader reader) {
 		while (reader.Read ()) {

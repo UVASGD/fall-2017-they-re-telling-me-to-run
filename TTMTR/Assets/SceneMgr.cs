@@ -6,6 +6,9 @@ public class SceneMgr : MonoBehaviour
 {
 
     public SoundManager soundMgr;
+    public GameObject CameraRig;
+
+    private Vector3 forestStart = new Vector3(514.9f, 6.1f, 674.9f);
 
     // Use this for initialization
     void Start()
@@ -27,8 +30,9 @@ public class SceneMgr : MonoBehaviour
 
     public void LoadForest()
     {
-        soundMgr.FadeMMforForest();
+       soundMgr.FadeMMforForest();
        StartCoroutine(LoadYourAsyncScene(2));
+       CameraRig.transform.position = forestStart;
     }
 
     public void LoadYourScene(int index)

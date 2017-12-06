@@ -33,14 +33,24 @@ public class FillMMButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 	{
 		BeginWaitThenUnfill ();
 	}
-	
-	void BeginFill()
+
+    void OnTriggerEnter(Collider coll)
+    {
+        BeginFill();
+    }
+
+    void OnTriggerExit(Collider coll)
+    {
+        BeginWaitThenUnfill();
+    }
+
+    public void BeginFill()
 	{
 		StopAllCoroutines ();
 		StartCoroutine (Fill());
 	}
 
-	void BeginWaitThenUnfill()
+	public void BeginWaitThenUnfill()
 	{
 		StopAllCoroutines ();
 		waited = 0.0f;
